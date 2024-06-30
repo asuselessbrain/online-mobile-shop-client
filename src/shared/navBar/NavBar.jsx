@@ -1,12 +1,21 @@
 import { useState } from "react";
 import logo from "../../assets/images/logo.png";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logOut } = useAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogOut = () => {
+    logOut().then(() => {
+      toast.success("Sign Out Successful!");
+    });
   };
 
   return (
@@ -112,11 +121,19 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li>
-              <Link
-                to="/login"
-              >
-                <button className="btn bg-green-500 border-0 text-white hover:bg-green-600">Sign In</button>
-              </Link>
+              {user ? (
+                <button onClick={() => handleLogOut()} className="btn bg-red-500 border-0 text-white hover:bg-red-600">
+                  Sign Out
+                </button>
+              ) : (
+                <Link to="/login">
+                  <button
+                    className="btn bg-green-500 border-0 text-white hover:bg-green-600"
+                  >
+                    Sign In
+                  </button>
+                </Link>
+              )}
             </li>
           </ul>
         </div>

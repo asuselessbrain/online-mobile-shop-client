@@ -3,35 +3,56 @@ import login from "../../../public/login.json";
 import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const { googleSignIn, githubSignIn } = useAuth();
+
+  const handleGoogleSignIn = () => {
+    googleSignIn().then((res) => {
+      if (res.user) {
+        toast.success("Login Successful!");
+      }
+    });
+  };
+  const handleGithubSignIn = () => {
+    githubSignIn().then((res) => {
+      if (res.user) {
+        toast.success("Login Successful!");
+      }
+    });
+  };
   return (
     <div className="py-16">
-        <Helmet>
-        <title>AstraGadgets | Sign In</title>
+      <Helmet>
+        <title>AstraGadgets / Sign In</title>
       </Helmet>
       <div className="flex items-center bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-full">
         <div
           className="hidden lg:block lg:w-1/2 bg-cover"
           style={{
-            "backgroundColor": "gray",
+            backgroundColor: "gray",
           }}
         >
           <Lottie animationData={login} loop={true} />;
         </div>
         <div className="w-full p-8 lg:w-1/2">
-        <Link
-          to="/"
-          className="flex items-center justify-center mb-8 space-x-3 rtl:space-x-reverse"
-        >
-          <img src={logo} className="h-20" alt="Flowbite Logo" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            AstraGadgets
-          </span>
-        </Link>
+          <Link
+            to="/"
+            className="flex items-center justify-center mb-8 space-x-3 rtl:space-x-reverse"
+          >
+            <img src={logo} className="h-20" alt="Flowbite Logo" />
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              AstraGadgets
+            </span>
+          </Link>
           <p className="text-xl text-gray-600 text-center">Welcome back!</p>
           <div className="flex items-center gap-6 my-8">
-            <button className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+            <button
+              onClick={handleGoogleSignIn}
+              className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+            >
               <div className="bg-white p-2 rounded-full">
                 <svg className="w-4" viewBox="0 0 533.5 544.3">
                   <path
@@ -55,7 +76,7 @@ const Login = () => {
               <span className="ml-4">Sign Up with Google</span>
             </button>
 
-            <button className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+            <button onClick={handleGithubSignIn} className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
               <div className="bg-white p-1 rounded-full">
                 <svg className="w-6" viewBox="0 0 32 32">
                   <path
