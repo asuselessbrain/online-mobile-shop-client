@@ -6,6 +6,8 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   signOut,
+  TwitterAuthProvider,
+  FacebookAuthProvider,
 } from "firebase/auth";
 
 export const AuthContext = createContext(null);
@@ -15,6 +17,8 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
+  const twitterProvider = new TwitterAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
 
   //   google signIn
 
@@ -22,11 +26,24 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-//   github signIn
+  //   github signIn
 
-const githubSignIn = () => {
-    return signInWithPopup(auth, githubProvider)
-}
+  const githubSignIn = () => {
+    return signInWithPopup(auth, githubProvider);
+  };
+
+  // twitter signIN
+
+  const twitterSignIn = () => {
+    return signInWithPopup(auth, twitterProvider);
+  };
+
+  //   facebook signIn
+
+  const facebookSignIn = () => {
+    return signInWithPopup(auth, facebookProvider);
+  };
+
   // logOut User
 
   const logOut = () => {
@@ -50,6 +67,8 @@ const githubSignIn = () => {
     loading,
     googleSignIn,
     githubSignIn,
+    twitterSignIn,
+    facebookSignIn,
     logOut,
   };
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;
