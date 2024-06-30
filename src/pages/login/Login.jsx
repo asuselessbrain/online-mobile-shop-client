@@ -2,15 +2,19 @@ import Lottie from "lottie-react";
 import login from "../../../public/login.json";
 import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   return (
     <div className="py-16">
+        <Helmet>
+        <title>AstraGadgets | Sign In</title>
+      </Helmet>
       <div className="flex items-center bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-full">
         <div
           className="hidden lg:block lg:w-1/2 bg-cover"
           style={{
-            "background-color": "gray",
+            "backgroundColor": "gray",
           }}
         >
           <Lottie animationData={login} loop={true} />;

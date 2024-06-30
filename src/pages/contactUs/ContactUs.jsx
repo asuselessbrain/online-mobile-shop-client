@@ -1,11 +1,14 @@
-
+import { Helmet } from "react-helmet";
 
 const ContactUs = () => {
-    return (
-        <div>
-            This is contact page
-        </div>
-    );
+  return (
+    <div>
+      <Helmet>
+        <title>AstraGadgets | Contact Us</title>
+      </Helmet>
+      This is contact page
+    </div>
+  );
 };
 
 export default ContactUs;
