@@ -1,5 +1,9 @@
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
+import slider1 from "../../../assets/images/slider/sider1.png"
+import slider2 from "../../../assets/images/slider/slider2.png"
+import slider3 from "../../../assets/images/slider/slider3.png"
+import slider4 from "../../../assets/images/slider/slider4.png"
 
 const Banner = () => {
     const [sliderRef] = useKeenSlider(
@@ -39,12 +43,10 @@ const Banner = () => {
       )
     return (
         <div ref={sliderRef} className="keen-slider">
-        <div className="keen-slider__slide number-slide1">1</div>
-        <div className="keen-slider__slide number-slide2">2</div>
-        <div className="keen-slider__slide number-slide3">3</div>
-        <div className="keen-slider__slide number-slide4">4</div>
-        <div className="keen-slider__slide number-slide5">5</div>
-        <div className="keen-slider__slide number-slide6">6</div>
+        <div className="keen-slider__slide number-slide1"><img src={slider2} alt="" /></div>
+        <div className="keen-slider__slide number-slide2"><img src={slider3} alt="" /></div>
+        <div className="keen-slider__slide number-slide3"><img src={slider1} alt="" /></div>
+        <div className="keen-slider__slide number-slide3"><img src={slider4} alt="" /></div>
       </div>
     );
 };

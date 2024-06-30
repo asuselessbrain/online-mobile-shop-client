@@ -8,7 +8,7 @@ const NavBar = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <nav className="bg-[#15151580] border-gray-200 dark:bg-gray-900 px-6 py-2">
+    <nav className="bg-bg-white border-gray-200 dark:bg-gray-900 px-6 py-2">
       <div className="flex flex-wrap items-center justify-between mx-auto">
         <Link to="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -50,7 +50,7 @@ const NavBar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-[#EEFF25] md:border-b-4 md:border-[#EEFF25] md:p-2 dark:text-white md:dark:text-blue-500"
+                className="block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2 dark:text-white md:dark:text-blue-500"
                 aria-current="page"
               >
                 Home
