@@ -5,10 +5,18 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useState } from "react";
 
 const Login = () => {
   const { googleSignIn, githubSignIn, twitterSignIn, facebookSignIn } =
     useAuth();
+  const [disabled, setDisabled] = useState(true);
+
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setDisabled(false)
+  }
 
   const handleGoogleSignIn = () => {
     googleSignIn().then((res) => {
@@ -63,7 +71,7 @@ const Login = () => {
             </span>
           </Link>
           <p className="text-xl text-gray-600 text-center">Welcome back!</p>
-          <div className="flex items-center gap-6 my-8">
+          <div className="flex flex-col md:flex-row items-center gap-6 my-8">
             <button
               onClick={handleGoogleSignIn}
               className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
@@ -106,7 +114,7 @@ const Login = () => {
               <span className="ml-4">Sign Up with GitHub</span>
             </button>
           </div>
-          <div className="flex items-center gap-6 my-8">
+          <div className="flex flex-col md:flex-row items-center gap-6 my-8">
             <button
               onClick={handleTwitterSignIn}
               className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
@@ -114,7 +122,7 @@ const Login = () => {
               <svg
                 className="h-6 w-6 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
                 viewBox="0 -4 48 48"
                 version="1.1"
               >
@@ -141,11 +149,14 @@ const Login = () => {
               <span>Continue with Twitter</span>
             </button>
 
-            <button onClick={handleFaceboookSignIn} className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+            <button
+              onClick={handleFaceboookSignIn}
+              className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+            >
               <svg
                 className="h-6 w-6 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
                 viewBox="0 0 48 48"
                 version="1.1"
               >
@@ -202,10 +213,10 @@ const Login = () => {
               type="password"
             />
           </div>
+          <ReCAPTCHA className="mt-8" sitekey="6Le62AQqAAAAAFUTkoqs5puIqO8aHfQRBMLOpeIM" onChange={onChange} />
+
           <div className="mt-8">
-            <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
-              Login
-            </button>
+            <input type="submit" className="btn bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" disabled={disabled}  value="Login"/>
           </div>
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 md:w-1/4"></span>
