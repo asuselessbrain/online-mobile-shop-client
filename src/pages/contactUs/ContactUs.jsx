@@ -16,7 +16,7 @@ const ContactUs = () => {
       .then(
         () => {
           toast.success("Email send Successfully!")
-          
+          form.current.reset()
         },
         (error) => {
           toast.error("Something went wrong!")
