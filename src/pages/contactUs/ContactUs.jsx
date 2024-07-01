@@ -20,6 +20,7 @@ const ContactUs = () => {
         },
         (error) => {
           toast.error("Something went wrong!")
+          console.log(error)
         }
       );      
   };
