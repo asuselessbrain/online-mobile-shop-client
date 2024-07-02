@@ -58,14 +58,14 @@ const NavBar = () => {
           className={`${isOpen ? "block" : "hidden"} w-full md:block md:w-auto`}
           id="navbar-default"
         >
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
             <li>
               <NavLink
                 to="/"
                 className={({ isActive }) =>
                   isActive
-                    ? "block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2 dark:text-white md:dark:text-blue-500"
-                    : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2 dark:text-white md:dark:text-blue-500"
+                    ? "block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
+                    : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
                 }
                 aria-current="page"
               >
@@ -77,8 +77,8 @@ const NavBar = () => {
                 to="/about"
                 className={({ isActive }) =>
                   isActive
-                    ? "block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2 dark:text-white md:dark:text-blue-500"
-                    : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2 dark:text-white md:dark:text-blue-500"
+                    ? "block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
+                    : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
                 }
               >
                 About
@@ -89,8 +89,8 @@ const NavBar = () => {
                 to="/services"
                 className={({ isActive }) =>
                   isActive
-                    ? "block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2 dark:text-white md:dark:text-blue-500"
-                    : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2 dark:text-white md:dark:text-blue-500"
+                    ? "block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
+                    : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
                 }
               >
                 Services
@@ -101,8 +101,8 @@ const NavBar = () => {
                 to="/pricing"
                 className={({ isActive }) =>
                   isActive
-                    ? "block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2 dark:text-white md:dark:text-blue-500"
-                    : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2 dark:text-white md:dark:text-blue-500"
+                    ? "block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
+                    : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
                 }
               >
                 Pricing
@@ -113,8 +113,8 @@ const NavBar = () => {
                 to="/contact"
                 className={({ isActive }) =>
                   isActive
-                    ? "block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2 dark:text-white md:dark:text-blue-500"
-                    : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2 dark:text-white md:dark:text-blue-500"
+                    ? "block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
+                    : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
                 }
               >
                 Contact Us
