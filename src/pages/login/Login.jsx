@@ -15,7 +15,7 @@ const Login = () => {
 
   function onChange(value) {
     console.log("Captcha value:", value);
-    setDisabled(false)
+    setDisabled(false);
   }
 
   const handleGoogleSignIn = () => {
@@ -51,7 +51,7 @@ const Login = () => {
       <Helmet>
         <title>AstraGadgets / Sign In</title>
       </Helmet>
-      <div className="flex items-center bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-full">
+      <div className="flex items-center bg-white rounded-lg shadow-lg overflow-hidden dark:bg-gray-900 mx-auto max-w-sm lg:max-w-full">
         <div
           className="hidden lg:block lg:w-1/2 bg-cover"
           style={{
@@ -70,11 +70,11 @@ const Login = () => {
               AstraGadgets
             </span>
           </Link>
-          <p className="text-xl text-gray-600 text-center">Welcome back!</p>
+          <p className="text-xl text-gray-600 text-center dark:text-gray-200">Welcome back!</p>
           <div className="flex flex-col md:flex-row items-center gap-6 my-8">
             <button
               onClick={handleGoogleSignIn}
-              className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+              className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline dark:bg-gray-700 dark:text-white"
             >
               <div className="bg-white p-2 rounded-full">
                 <svg className="w-4" viewBox="0 0 533.5 544.3">
@@ -101,7 +101,7 @@ const Login = () => {
 
             <button
               onClick={handleGithubSignIn}
-              className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+              className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline dark:bg-gray-700 dark:text-white"
             >
               <div className="bg-white p-1 rounded-full">
                 <svg className="w-6" viewBox="0 0 32 32">
@@ -117,7 +117,7 @@ const Login = () => {
           <div className="flex flex-col md:flex-row items-center gap-6 my-8">
             <button
               onClick={handleTwitterSignIn}
-              className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+              className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline dark:bg-gray-700 dark:text-white"
             >
               <svg
                 className="h-6 w-6 mr-2"
@@ -151,7 +151,7 @@ const Login = () => {
 
             <button
               onClick={handleFaceboookSignIn}
-              className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+              className="w-full font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline dark:bg-gray-700 dark:text-white"
             >
               <svg
                 className="h-6 w-6 mr-2"
@@ -185,39 +185,45 @@ const Login = () => {
           </div>
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 lg:w-1/4"></span>
-            <a href="#" className="text-xs text-center text-gray-500 uppercase">
+            <p className="text-xs text-center text-gray-500 dark:text-gray-200 uppercase">
               or login with email
-            </a>
+            </p>
             <span className="border-b w-1/5 lg:w-1/4"></span>
           </div>
-          <div className="mt-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Email Address
-            </label>
-            <input
-              className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-              type="email"
-            />
-          </div>
-          <div className="mt-4">
-            <div className="flex justify-between">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Password
+          <form>
+            <div className="mt-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-200">
+                Email Address
               </label>
-              <a href="#" className="text-xs text-gray-500">
-                Forget Password?
-              </a>
+              <input
+                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                type="email"
+              />
             </div>
-            <input
-              className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-              type="password"
-            />
-          </div>
-          <ReCAPTCHA className="mt-8" sitekey="6Le62AQqAAAAAFUTkoqs5puIqO8aHfQRBMLOpeIM" onChange={onChange} />
-
-          <div className="mt-8">
-            <input type="submit" className="btn bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" disabled={disabled}  value="Login"/>
-          </div>
+            <div className="mt-4">
+              <div className="flex justify-between">
+                <label className="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-200">
+                  Password
+                </label>
+                <a href="#" className="text-xs text-gray-500">
+                  Forget Password?
+                </a>
+              </div>
+              <input
+                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                type="password"
+              />
+            </div>
+            <ReCAPTCHA sitekey="6Le62AQqAAAAAFUTkoqs5puIqO8aHfQRBMLOpeIM" className="mt-8" onChange={onChange} />
+            <div className="mt-8">
+              <input
+                type="submit"
+                className="btn bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600 dark:bg-green-500"
+                disabled={disabled}
+                value="Login"
+              />
+            </div>
+          </form>
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 md:w-1/4"></span>
             <Link to="/sign-up" className="text-xs text-gray-500 uppercase">

@@ -18,9 +18,7 @@ const SignUp = () => {
                   <div className="md:mx-6 md:p-12">
                     {/* <!--Logo--> */}
                     <div className="text-center">
-                      <div
-                        className="flex items-center justify-center mb-8 space-x-3 rtl:space-x-reverse"
-                      >
+                      <div className="flex items-center justify-center mb-8 space-x-3 rtl:space-x-reverse">
                         <img src={logo} className="h-20" alt="Flowbite Logo" />
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                           AstraGadgets
@@ -75,24 +73,22 @@ const SignUp = () => {
                         >
                           Sign up
                         </button>
-
                         {/* <!--Forgot password link--> */}
                         <a href="#!">Terms and conditions</a>
                       </div>
-
-                      {/* <!--Register button--> */}
-                      <div className="flex items-center justify-between pb-6">
-                        <p className="mb-0 me-2">Have an account?</p>
-                        <button
-                          type="button"
-                          className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-danger-50/50 hover:text-danger-600 focus:border-danger-600 focus:bg-danger-50/50 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-rose-950 dark:focus:bg-rose-950"
-                          data-twe-ripple-init
-                          data-twe-ripple-color="light"
-                        >
-                          Login
-                        </button>
-                      </div>
                     </form>
+
+                    {/* <!--Register button--> */}
+                    <div className="flex items-center justify-between pb-6">
+                      <p className="mb-0 me-2">Have an account?</p>
+                      <Link to="/login"
+                        className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-danger-50/50 hover:text-danger-600 focus:border-danger-600 focus:bg-danger-50/50 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-rose-950 dark:focus:bg-rose-950"
+                        data-twe-ripple-init
+                        data-twe-ripple-color="light"
+                      >
+                        Login
+                      </Link>
+                    </div>
                   </div>
                 </div>
 

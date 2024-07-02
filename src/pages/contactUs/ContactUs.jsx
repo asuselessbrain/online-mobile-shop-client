@@ -44,9 +44,9 @@ const ContactUs = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
-            <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
+            <div className="bg-white dark:bg-gray-900 dark:text-gray-200 relative flex flex-wrap py-6 rounded shadow-md">
               <div className="lg:w-1/2 px-6">
-                <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
+                <h2 className="title-font font-semibold text-gray-900 dark:text-white tracking-widest text-xs dark:text-xl dark:mb-4">
                   ADDRESS
                 </h2>
                 <p className="mt-1">
@@ -55,22 +55,22 @@ const ContactUs = () => {
                 </p>
               </div>
               <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
-                <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
+                <h2 className="title-font font-semibold text-gray-900 dark:text-white tracking-widest text-xs dark:text-xl">
                   EMAIL
                 </h2>
                 <a className="text-red-500 leading-relaxed">
                   example@email.com
                 </a>
-                <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">
+                <h2 className="title-font font-semibold text-gray-900 dark:text-white tracking-widest text-xs dark:text-xl dark:mt-4 mb-2">
                   PHONE
                 </h2>
                 <p className="leading-relaxed">123-456-7890</p>
               </div>
             </div>
           </div>
-          <div className="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
+          <div className="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 dark:bg-neutral-800 p-6">
             <div className="mb-6 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12">
-              <p className="text-base font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-200">
+              <p className="text-base font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-900">
                 Contact
               </p>
               <h2 className="font-heading mb-4 font-bold tracking-tight text-gray-900 dark:text-white text-3xl sm:text-5xl">
@@ -84,7 +84,7 @@ const ContactUs = () => {
               <div className="relative mb-4">
                 <label
                   htmlFor="name"
-                  className="leading-7 text-sm text-gray-600"
+                  className="leading-7 text-sm text-gray-600 dark:text-gray-200"
                 >
                   Name
                 </label>
@@ -98,7 +98,7 @@ const ContactUs = () => {
               <div className="relative mb-4">
                 <label
                   htmlFor="email"
-                  className="leading-7 text-sm text-gray-600"
+                  className="leading-7 text-sm text-gray-600 dark:text-gray-200"
                 >
                   Email
                 </label>
@@ -112,7 +112,7 @@ const ContactUs = () => {
               <div className="relative mb-4">
                 <label
                   htmlFor="message"
-                  className="leading-7 text-sm text-gray-600"
+                  className="leading-7 text-sm text-gray-600 dark:text-gray-200"
                 >
                   Message
                 </label>
