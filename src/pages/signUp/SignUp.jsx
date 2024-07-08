@@ -7,15 +7,36 @@ import { eye } from "react-icons-kit/feather/eye";
 import { useState } from "react";
 import Lottie from "lottie-react";
 import signUp from "../../../public/signUp.json";
+import { useForm } from "react-hook-form";
+import axios from 'axios';
 
 const SignUp = () => {
-  const [password, setPassword] = useState("");
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
 
-  const [confPassword, setConfPassword] = useState("");
   const [confType, setConfType] = useState("password");
   const [confIcon, setConfIcon] = useState(eyeOff);
+
+  const image_hosting_api = import.meta.env.VITE_Imagebb_API_KEY;
+  const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_api}`;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
+    console.log(data);
+
+    const imageFile = {image: data.image[0]}
+    const res = await axios.post(image_hosting_url,imageFile,{
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    })
+
+    console.log(res.data)
+  };
 
   const handleToggle = () => {
     if (type === "password") {
@@ -27,7 +48,7 @@ const SignUp = () => {
     }
   };
 
-  const handleToggleConfirmPassword =() =>{
+  const handleToggleConfirmPassword = () => {
     if (confType === "password") {
       setConfIcon(eye);
       setConfType("text");
@@ -35,7 +56,7 @@ const SignUp = () => {
       setConfIcon(eyeOff);
       setConfType("password");
     }
-  }
+  };
 
   return (
     <section className="gradient-form h-full bg-neutral-200 dark:bg-neutral-700">
@@ -60,7 +81,7 @@ const SignUp = () => {
                       </div>
                     </div>
 
-                    <form>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                       <p className="mb-4">Please register an account</p>
                       {/* <!--Username input--> */}
                       <div
@@ -73,7 +94,9 @@ const SignUp = () => {
                           </label>
                           <input
                             className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                            placeholder="Enter Your Name"
                             type="text"
+                            {...register("name", { required: true })}
                           />
                         </div>
                       </div>
@@ -88,7 +111,9 @@ const SignUp = () => {
                           </label>
                           <input
                             className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                            placeholder="Enter Your Email"
                             type="email"
+                            {...register("email", { required: true })}
                           />
                         </div>
                       </div>
@@ -106,9 +131,8 @@ const SignUp = () => {
                             type={type}
                             name="password"
                             placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
                             autoComplete="current-password"
+                            {...register("password", { required: true })}
                           />
                           <span
                             className="absolute right-4 bottom-2"
@@ -127,7 +151,7 @@ const SignUp = () => {
                       <div className="mt-4">
                         <div className="flex justify-between">
                           <label className="block text-gray-700 text-sm font-bold mb-2">
-                            Password
+                            Confirm Password
                           </label>
                         </div>
                         <div className="relative">
@@ -135,37 +159,40 @@ const SignUp = () => {
                             className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                             type={confType}
                             name="confPassword"
-                            placeholder="Password"
-                            value={confPassword}
-                            onChange={(e) => setConfPassword(e.target.value)}
+                            placeholder="Confirm Password"
                             autoComplete="current-password"
+                            {...register("confirmPassword", { required: true })}
                           />
                           <span
-                            className="absolute right-4 bottom-2"
+                            className="absolute right-4 bottom-2 cursor-pointer"
                             onClick={handleToggleConfirmPassword}
                           >
-                            <Icon
-                              // class="absolute mr-10"
-                              icon={confIcon}
-                              size={25}
-                            />
+                            <Icon icon={confIcon} size={25} />
                           </span>
                         </div>
                       </div>
+
+                      {/* image input */}
+                      <div className="mt-4">
+                        <input
+                          type="file"
+                          className="file-input w-full"
+                          {...register("image", { required: true })}
+                        />
+                      </div>
                       {/* <!--Submit button--> */}
                       <div className="mb-12 pb-1 pt-1 text-center">
-                        <button
+                        <input
                           className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong mt-4"
-                          type="button"
                           data-twe-ripple-init
                           data-twe-ripple-color="light"
                           style={{
                             background:
                               "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
                           }}
-                        >
-                          Sign up
-                        </button>
+                          type="submit"
+                          value="Sign up"
+                        />
                         {/* <!--Forgot password link--> */}
                         <a href="#!">Terms and conditions</a>
                       </div>
@@ -195,7 +222,7 @@ const SignUp = () => {
                   }}
                 >
                   <div className="px-4 py-6 text-white md:mx-6 md:p-12">
-                  <Lottie animationData={signUp} loop={true} />
+                    <Lottie animationData={signUp} loop={true} />
                   </div>
                 </div>
               </div>
