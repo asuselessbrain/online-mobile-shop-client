@@ -7,11 +7,28 @@ import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useState } from "react";
+import { Icon } from "react-icons-kit";
+import { eyeOff } from "react-icons-kit/feather/eyeOff";
+import { eye } from "react-icons-kit/feather/eye";
 
 const Login = () => {
   const { googleSignIn, githubSignIn, twitterSignIn, facebookSignIn } =
     useAuth();
   const [disabled, setDisabled] = useState(true);
+
+  const [password, setPassword] = useState("");
+  const [type, setType] = useState("password");
+  const [icon, setIcon] = useState(eyeOff);
+
+  const handleToggle = () => {
+    if (type === "password") {
+      setIcon(eye);
+      setType("text");
+    } else {
+      setIcon(eyeOff);
+      setType("password");
+    }
+  };
 
   function onChange(value) {
     console.log("Captcha value:", value);
@@ -70,7 +87,9 @@ const Login = () => {
               AstraGadgets
             </span>
           </Link>
-          <p className="text-xl text-gray-600 text-center dark:text-gray-200">Welcome back!</p>
+          <p className="text-xl text-gray-600 text-center dark:text-gray-200">
+            Welcome back!
+          </p>
           <div className="flex flex-col md:flex-row items-center gap-6 my-8">
             <button
               onClick={handleGoogleSignIn}
@@ -209,12 +228,33 @@ const Login = () => {
                   Forget Password?
                 </a>
               </div>
-              <input
-                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                type="password"
-              />
+              <div className="relative">
+                <input
+                  className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                  type={type}
+                  name="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
+                />
+                <span
+                  className="absolute right-4 bottom-2"
+                  onClick={handleToggle}
+                >
+                  <Icon
+                    // class="absolute mr-10"
+                    icon={icon}
+                    size={25}
+                  />
+                </span>
+              </div>
             </div>
-            <ReCAPTCHA sitekey="6Le62AQqAAAAAFUTkoqs5puIqO8aHfQRBMLOpeIM" className="mt-8" onChange={onChange} />
+            <ReCAPTCHA
+              sitekey="6Le62AQqAAAAAFUTkoqs5puIqO8aHfQRBMLOpeIM"
+              className="mt-8"
+              onChange={onChange}
+            />
             <div className="mt-8">
               <input
                 type="submit"
