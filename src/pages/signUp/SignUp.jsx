@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import logo from "../../assets/images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
@@ -8,9 +8,14 @@ import { useState } from "react";
 import Lottie from "lottie-react";
 import signUp from "../../../public/signUp.json";
 import { useForm } from "react-hook-form";
-import axios from 'axios';
+import axios from "axios";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
+  const { createUser, updateUser, logOut } = useAuth();
+  const navigate = useNavigate()
+
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
 
@@ -28,14 +33,28 @@ const SignUp = () => {
   const onSubmit = async (data) => {
     console.log(data);
 
-    const imageFile = {image: data.image[0]}
-    const res = await axios.post(image_hosting_url,imageFile,{
+    const imageFile = { image: data.image[0] };
+    const res = await axios.post(image_hosting_url, imageFile, {
       headers: {
-        "content-type": "multipart/form-data"
-      }
-    })
+        "content-type": "multipart/form-data",
+      },
+    });
 
-    console.log(res.data)
+    const { name, email, password } = data;
+    const imageUrl = res.data.data.display_url;
+
+    console.log(name, email, password, imageUrl);
+    createUser(email, password)
+      .then((userCredential) => {
+        updateUser(name, imageUrl);
+        logOut();
+        toast.success("User Created Successfully! Please Login");
+        navigate('/login')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        toast.error(errorCode);
+      });
   };
 
   const handleToggle = () => {
@@ -89,15 +108,20 @@ const SignUp = () => {
                         data-twe-input-wrapper-init
                       >
                         <div className="mt-4">
-                          <label className="block text-gray-700 text-sm font-bold mb-2">
+                          <label className="block text-gray-700 dark:text-gray-200 text-md font-bold mb-2">
                             Full Name
                           </label>
                           <input
-                            className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                            className="bg-gray-200 mb-2 text-gray-700 dark:text-gray-800 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                             placeholder="Enter Your Name"
                             type="text"
                             {...register("name", { required: true })}
                           />
+                          {errors.name && (
+                            <span className="text-red-500">
+                              Name is required
+                            </span>
+                          )}
                         </div>
                       </div>
                       {/* email input */}
@@ -106,28 +130,33 @@ const SignUp = () => {
                         data-twe-input-wrapper-init
                       >
                         <div className="mt-4">
-                          <label className="block text-gray-700 text-sm font-bold mb-2">
+                          <label className="block text-gray-700 dark:text-gray-200 text-md font-bold mb-2">
                             Email Address
                           </label>
                           <input
-                            className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                            className="bg-gray-200 text-gray-700 mb-2 dark:text-gray-800 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                             placeholder="Enter Your Email"
                             type="email"
                             {...register("email", { required: true })}
                           />
+                          {errors.email && (
+                            <span className="text-red-500">
+                              Email is required
+                            </span>
+                          )}
                         </div>
                       </div>
 
                       {/* <!--Password input--> */}
                       <div className="mt-4">
                         <div className="flex justify-between">
-                          <label className="block text-gray-700 text-sm font-bold mb-2">
+                          <label className="block text-gray-700 dark:text-gray-200 text-md font-bold mb-2">
                             Password
                           </label>
                         </div>
                         <div className="relative">
                           <input
-                            className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                            className="bg-gray-200 text-gray-700 dark:text-gray-800 mb-2 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                             type={type}
                             name="password"
                             placeholder="Password"
@@ -138,47 +167,66 @@ const SignUp = () => {
                             className="absolute right-4 bottom-2"
                             onClick={handleToggle}
                           >
-                            <Icon
-                              // class="absolute mr-10"
-                              icon={icon}
-                              size={25}
-                            />
+                            <Icon class="text-black" icon={icon} size={25} />
                           </span>
                         </div>
+                        {errors.password && (
+                          <span className="text-red-500">
+                            Password is required
+                          </span>
+                        )}
                       </div>
 
                       {/* confirm password */}
                       <div className="mt-4">
                         <div className="flex justify-between">
-                          <label className="block text-gray-700 text-sm font-bold mb-2">
+                          <label className="block text-gray-700 dark:text-gray-200 text-md font-bold mb-2">
                             Confirm Password
                           </label>
                         </div>
                         <div className="relative">
                           <input
-                            className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                            className="bg-gray-200 text-gray-700 mb-2 dark:text-gray-800 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                             type={confType}
                             name="confPassword"
                             placeholder="Confirm Password"
                             autoComplete="current-password"
                             {...register("confirmPassword", { required: true })}
                           />
+
                           <span
                             className="absolute right-4 bottom-2 cursor-pointer"
                             onClick={handleToggleConfirmPassword}
                           >
-                            <Icon icon={confIcon} size={25} />
+                            <Icon
+                              className="text-black"
+                              icon={confIcon}
+                              size={25}
+                            />
                           </span>
                         </div>
+                        {errors.confirmPassword && (
+                          <span className="text-red-500">
+                            Confirm Password is required
+                          </span>
+                        )}
                       </div>
 
                       {/* image input */}
                       <div className="mt-4">
+                        <label className="block text-gray-700 dark:text-gray-200 text-md font-bold mb-2">
+                          Image
+                        </label>
                         <input
                           type="file"
-                          className="file-input w-full"
+                          className="file-input mb-2 w-full"
                           {...register("image", { required: true })}
                         />
+                        {errors.image && (
+                          <span className="text-red-500">
+                            Image is required
+                          </span>
+                        )}
                       </div>
                       {/* <!--Submit button--> */}
                       <div className="mb-12 pb-1 pt-1 text-center">

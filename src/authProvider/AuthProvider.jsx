@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebaseConfig/forebase.config";
 import {
@@ -8,6 +9,8 @@ import {
   signOut,
   TwitterAuthProvider,
   FacebookAuthProvider,
+  createUserWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 
 export const AuthContext = createContext(null);
@@ -19,6 +22,20 @@ const AuthProvider = ({ children }) => {
   const githubProvider = new GithubAuthProvider();
   const twitterProvider = new TwitterAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
+
+  // create user
+
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  // update user
+
+  const updateUser = (name, photoUrl) => {
+    updateProfile(auth.currentUser, {
+      displayName: name, photoURL: photoUrl
+    })
+  }
 
   //   google signIn
 
@@ -65,6 +82,8 @@ const AuthProvider = ({ children }) => {
   const info = {
     user,
     loading,
+    createUser,
+    updateUser,
     googleSignIn,
     githubSignIn,
     twitterSignIn,
