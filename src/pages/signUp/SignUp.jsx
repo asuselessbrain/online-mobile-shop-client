@@ -11,10 +11,12 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
   const { createUser, updateUser, logOut } = useAuth();
-  const navigate = useNavigate()
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
@@ -47,9 +49,14 @@ const SignUp = () => {
     createUser(email, password)
       .then((userCredential) => {
         updateUser(name, imageUrl);
+        const userInfo = {
+          name: name,
+          email: email
+        }
+        axiosPublic.post('/users', userInfo )
         logOut();
         toast.success("User Created Successfully! Please Login");
-        navigate('/login')
+        navigate("/login");
       })
       .catch((error) => {
         const errorCode = error.code;
