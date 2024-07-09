@@ -12,9 +12,11 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const SignUp = () => {
   const { createUser, updateUser, logOut } = useAuth();
+  const [disabled, setDisabled] = useState(true);
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
@@ -51,9 +53,9 @@ const SignUp = () => {
         updateUser(name, imageUrl);
         const userInfo = {
           name: name,
-          email: email
-        }
-        axiosPublic.post('/users', userInfo )
+          email: email,
+        };
+        axiosPublic.post("/users", userInfo);
         logOut();
         toast.success("User Created Successfully! Please Login");
         navigate("/login");
@@ -83,6 +85,11 @@ const SignUp = () => {
       setConfType("password");
     }
   };
+
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setDisabled(false);
+  }
 
   return (
     <section className="gradient-form h-full bg-neutral-200 dark:bg-neutral-700">
@@ -235,16 +242,23 @@ const SignUp = () => {
                           </span>
                         )}
                       </div>
+
+                      <ReCAPTCHA
+                        sitekey="6Le62AQqAAAAAFUTkoqs5puIqO8aHfQRBMLOpeIM"
+                        className="mt-8"
+                        onChange={onChange}
+                      />
+
                       {/* <!--Submit button--> */}
                       <div className="mb-12 pb-1 pt-1 text-center">
-                        <input
-                          className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong mt-4"
+                        <input disabled={disabled}
+                          className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong mt-4 bg-gray-800"
                           data-twe-ripple-init
                           data-twe-ripple-color="light"
-                          style={{
-                            background:
-                              "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
-                          }}
+                          // style={{
+                          //   background:
+                          //     "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
+                          // }}
                           type="submit"
                           value="Sign up"
                         />
