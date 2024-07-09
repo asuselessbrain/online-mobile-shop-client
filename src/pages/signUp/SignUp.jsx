@@ -39,10 +39,10 @@ const SignUp = () => {
     });
 
     const { name, email, password } = data;
+    const imageUrl = res.data.data.display_url;
 
-    
-
-    console.log(name, email, password, res.data.data.display_url);
+    console.log(name, email, password, imageUrl);
+    createUser(email, password);
   };
 
   const handleToggle = () => {
