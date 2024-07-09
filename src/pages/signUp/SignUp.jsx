@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import logo from "../../assets/images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
@@ -10,9 +10,11 @@ import signUp from "../../../public/signUp.json";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
-  const { createUser } = useAuth();
+  const { createUser, updateUser, logOut } = useAuth();
+  const navigate = useNavigate()
 
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
@@ -42,7 +44,17 @@ const SignUp = () => {
     const imageUrl = res.data.data.display_url;
 
     console.log(name, email, password, imageUrl);
-    createUser(email, password);
+    createUser(email, password)
+      .then((userCredential) => {
+        updateUser(name, imageUrl);
+        logOut();
+        toast.success("User Created Successfully! Please Login");
+        navigate('/login')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        toast.error(errorCode);
+      });
   };
 
   const handleToggle = () => {

@@ -10,6 +10,7 @@ import {
   TwitterAuthProvider,
   FacebookAuthProvider,
   createUserWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 
 export const AuthContext = createContext(null);
@@ -27,6 +28,14 @@ const AuthProvider = ({ children }) => {
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
+  // update user
+
+  const updateUser = (name, photoUrl) => {
+    updateProfile(auth.currentUser, {
+      displayName: name, photoURL: photoUrl
+    })
+  }
 
   //   google signIn
 
@@ -74,6 +83,7 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     createUser,
+    updateUser,
     googleSignIn,
     githubSignIn,
     twitterSignIn,
