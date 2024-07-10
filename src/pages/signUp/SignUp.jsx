@@ -13,6 +13,7 @@ import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import ReCAPTCHA from "react-google-recaptcha";
+import SocialLogin from "../../shared/components/SocialLogin";
 
 const SignUp = () => {
   const { createUser, updateUser, logOut } = useAuth();
@@ -251,14 +252,12 @@ const SignUp = () => {
 
                       {/* <!--Submit button--> */}
                       <div className="mb-12 pb-1 pt-1 text-center">
-                        <input disabled={disabled}
-                          className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong mt-4 bg-gray-800"
+                        <input
+                          
+                          className="btn mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong mt-4 bg-[#3B71CA]"
                           data-twe-ripple-init
                           data-twe-ripple-color="light"
-                          // style={{
-                          //   background:
-                          //     "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
-                          // }}
+                          disabled={disabled}
                           type="submit"
                           value="Sign up"
                         />
@@ -266,6 +265,9 @@ const SignUp = () => {
                         <a href="#!">Terms and conditions</a>
                       </div>
                     </form>
+
+                    <div className="divider">OR</div>
+                    <SocialLogin />
 
                     {/* <!--Register button--> */}
                     <div className="flex items-center justify-between pb-6">

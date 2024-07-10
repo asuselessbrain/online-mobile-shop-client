@@ -1,3 +1,4 @@
+import LatestPhone from "./latestPhones/LatestPhone";
 import Banner from "./banner/Banner";
 import { Helmet } from "react-helmet-async";
 
@@ -8,6 +9,7 @@ const Home = () => {
         <title>AstraGadgets | Home</title>
       </Helmet>
       <Banner />
+      <LatestPhone />
     </div>
   );
 };
