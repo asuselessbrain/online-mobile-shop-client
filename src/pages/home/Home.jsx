@@ -1,4 +1,4 @@
-import LatestPhone from "../../components/latestPhones/LatestPhone";
+import LatestPhone from "./latestPhones/LatestPhone";
 import Banner from "./banner/Banner";
 import { Helmet } from "react-helmet-async";
 
