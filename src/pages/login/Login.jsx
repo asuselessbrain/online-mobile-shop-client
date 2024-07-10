@@ -1,7 +1,7 @@
 import Lottie from "lottie-react";
 import login from "../../../public/login.json";
 import logo from "../../assets/images/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useState } from "react";
@@ -15,6 +15,8 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const navigation = useNavigate();
   const { signInUser } = useAuth();
@@ -49,10 +51,10 @@ const Login = () => {
     signInUser(data.email, data.password)
       .then((userCredential) => {
         toast.success("SignIn Successful!");
-        navigation('/')
+        navigation(from, { replace: true });
       })
       .catch((error) => {
-        toast.error("Something went wrong!")
+        toast.error("Something went wrong!");
       });
   };
 
