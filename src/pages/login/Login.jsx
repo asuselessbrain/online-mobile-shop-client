@@ -73,7 +73,7 @@ const Login = () => {
                 Email Address
               </label>
               <input
-                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" placeholder="Enter Your Email"
                 type="email"
               />
             </div>
@@ -124,8 +124,8 @@ const Login = () => {
           </form>
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 md:w-1/4"></span>
-            <Link to="/sign-up" className="text-xs text-gray-500 uppercase">
-              or sign up
+            <Link to="/sign-up" className="text-md text-gray-500 uppercase">
+              or <span className="font-bold text-black ml-1"> sign up</span>
             </Link>
             <span className="border-b w-1/5 md:w-1/4"></span>
           </div>
