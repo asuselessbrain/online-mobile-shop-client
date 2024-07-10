@@ -16,13 +16,15 @@ const LatestPhone = () => {
   }, [axiosPublic]);
 
   return (
-    <div>
-      <h2 className="text-6xl my-20 font-Cinzel font-bold text-center">
+    <div className="my-20 ">
+      <h2 className="text-6xl mb-16 font-Cinzel font-bold text-center">
         Latest Phones
       </h2>
-      {latestPhone.map((phone) => (
-        <PhoneCard key={phone._id} phone={phone} />
-      ))}
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {latestPhone.map((phone) => (
+          <PhoneCard key={phone._id} phone={phone} />
+        ))}
+      </div>
     </div>
   );
 };
