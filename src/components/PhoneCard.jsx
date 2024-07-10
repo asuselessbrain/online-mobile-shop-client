@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 /* eslint-disable react/prop-types */
 const PhoneCard = ({ phone }) => {
   const { phone_name,image, price } = phone;
   return (
     <div>
-      <div className="bg-gray-100 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+      <div className="bg-gray-200 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
         <a href="#">
           <img
             src={image}
@@ -19,7 +21,7 @@ const PhoneCard = ({ phone }) => {
                 BDT <span className="text-red-500 text-lg font-medium">{price}</span>
               </p>
               <div className="ml-auto">
-                <button className="text-lg bg-orange-200 px-4 py-2 duration-500 rounded hover:scale-105 hover:shadow-xl">Show Details</button>
+                <Link to="/details"><button className="text-lg bg-gray-100 border-b-4 border-red-500 px-4 py-2 duration-500 rounded-xl hover:scale-105 hover:shadow-xl">Show Details</button></Link>
               </div>
             </div>
           </div>
