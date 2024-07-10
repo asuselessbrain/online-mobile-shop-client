@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily:{
+      Cinzel: ["Cinzel", "serif"]
+    }
   },
   plugins: [
     require('daisyui'),

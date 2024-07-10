@@ -1,19 +1,32 @@
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SocialLogin = () => {
   const { googleSignIn, githubSignIn, twitterSignIn, facebookSignIn } =
     useAuth();
+  const axiosPublic = useAxiosPublic();
   const handleGoogleSignIn = () => {
     googleSignIn().then((res) => {
       if (res.user) {
+        const userInfo = {
+          name: res.user.displayName,
+          email: res.user.email,
+        };
+        axiosPublic.post("/users", userInfo);
         toast.success("Login Successful!");
+        // console.log(res.user.email)
       }
     });
   };
   const handleGithubSignIn = () => {
     githubSignIn().then((res) => {
       if (res.user) {
+        const userInfo = {
+          name: res.user.displayName,
+          email: res.user.email,
+        };
+        axiosPublic.post("/users", userInfo);
         toast.success("Login Successful!");
       }
     });
@@ -21,6 +34,11 @@ const SocialLogin = () => {
   const handleTwitterSignIn = () => {
     twitterSignIn().then((res) => {
       if (res.user) {
+        const userInfo = {
+          name: res.user.displayName,
+          email: res.user.email,
+        };
+        axiosPublic.post("/users", userInfo);
         toast.success("Login Successful!");
       }
     });
@@ -28,6 +46,11 @@ const SocialLogin = () => {
   const handleFaceboookSignIn = () => {
     facebookSignIn().then((res) => {
       if (res.user) {
+        const userInfo = {
+          name: res.user.displayName,
+          email: res.user.email,
+        };
+        axiosPublic.post("/users", userInfo);
         toast.success("Login Successful!");
       }
     });
