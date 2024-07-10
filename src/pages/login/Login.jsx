@@ -1,7 +1,7 @@
 import Lottie from "lottie-react";
 import login from "../../../public/login.json";
 import logo from "../../assets/images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useState } from "react";
@@ -9,11 +9,16 @@ import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import SocialLogin from "../../shared/components/SocialLogin";
+import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
 
-  const [password, setPassword] = useState("");
+  const navigation = useNavigate();
+  const { signInUser } = useAuth();
+
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
 
@@ -31,6 +36,25 @@ const Login = () => {
     console.log("Captcha value:", value);
     setDisabled(false);
   }
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    signInUser(data.email, data.password)
+      .then((userCredential) => {
+        toast.success("SignIn Successful!");
+        navigation('/')
+      })
+      .catch((error) => {
+        toast.error("Something went wrong!")
+      });
+  };
 
   return (
     <div className="py-16">
@@ -67,15 +91,20 @@ const Login = () => {
             </p>
             <span className="border-b w-1/5 lg:w-1/4"></span>
           </div>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mt-4">
               <label className="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-200">
                 Email Address
               </label>
               <input
-                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" placeholder="Enter Your Email"
+                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                placeholder="Enter Your Email"
                 type="email"
+                {...register("email", { required: true })}
               />
+              {errors.email && (
+                <span className="text-red-500 mt-4">Email is required</span>
+              )}
             </div>
             <div className="mt-4">
               <div className="flex justify-between">
@@ -92,9 +121,7 @@ const Login = () => {
                   type={type}
                   name="password"
                   placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="current-password"
+                  {...register("password", { required: true })}
                 />
                 <span
                   className="absolute right-4 bottom-2"
@@ -107,6 +134,9 @@ const Login = () => {
                   />
                 </span>
               </div>
+              {errors.password && (
+                <span className="text-red-500 mt-4">Password is required</span>
+              )}
             </div>
             <ReCAPTCHA
               sitekey="6Le62AQqAAAAAFUTkoqs5puIqO8aHfQRBMLOpeIM"
