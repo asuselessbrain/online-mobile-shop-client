@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Details = () => {
   const axiosPublic = useAxiosPublic();
@@ -22,7 +23,10 @@ const Details = () => {
     );
   }
   return (
-    <div className="bg-gray-100 dark:bg-gray-800 py-8">
+    <div className="py-8">
+      <Helmet>
+        <title>AstraGadgets / {phoneDetails.phone_name}</title>
+      </Helmet>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row gap-10 justify-between items-center">
           <div className="px-4">
@@ -47,61 +51,85 @@ const Details = () => {
             </div>
           </div>
           <div className="md:flex-1 px-4">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+            <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-6">
               {phoneDetails.phone_name}
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-              ante justo. Integer euismod libero id mauris malesuada tincidunt.
-            </p>
-            <div className="flex mb-4">
-              <div className="mr-4">
-                <span className="font-bold text-gray-700 dark:text-gray-300">
+            <div className="flex gap-4 mb-6">
+              <div>
+                <span className="font-semibold text-lg text-gray-700 dark:text-gray-300">
+                  Brand:
+                </span>
+                <span className="text-black ml-2 bg-gray-300 px-4 rounded-full py-2">
+                  {phoneDetails.brand}
+                </span>
+              </div>
+              <div>
+                <span className="font-semibold text-lg text-gray-700 dark:text-gray-300">
                   Price:
                 </span>
-                <span className="text-gray-600 dark:text-gray-300">$29.99</span>
+                <span className="ml-2 font-bold text-red-500 bg-gray-300 px-4 rounded-full py-2">
+                  {" "}
+                  TK {phoneDetails.price}
+                </span>
               </div>
               <div>
                 <span className="font-bold text-gray-700 dark:text-gray-300">
-                  Availability:
+                  Availability: 
                 </span>
-                <span className="text-gray-600 dark:text-gray-300">
+                <span className="text-black ml-2 bg-gray-300 px-4 rounded-full py-2">
                   In Stock
                 </span>
               </div>
             </div>
-            <div className="mb-4">
-              <span className="font-bold text-gray-700 dark:text-gray-300">
-                Select Color:
+            <div className="mb-2">
+              <span className="font-bold text-xl text-gray-700 dark:text-gray-300">
+                Features:
               </span>
-              <div className="flex items-center mt-2">
-                <button className="w-6 h-6 rounded-full bg-gray-800 dark:bg-gray-200 mr-2"></button>
-                <button className="w-6 h-6 rounded-full bg-red-500 dark:bg-red-700 mr-2"></button>
-                <button className="w-6 h-6 rounded-full bg-blue-500 dark:bg-blue-700 mr-2"></button>
-                <button className="w-6 h-6 rounded-full bg-yellow-500 dark:bg-yellow-700 mr-2"></button>
+              <div className="pl-8 mt-6 space-y-2">
+                <li>
+                  <span className="text-lg font-semibold mr-2">Display : </span>
+                  {phoneDetails.mainFeatures.displaySize}
+                </li>
+                <li>
+                  <span className="text-lg font-semibold mr-2">Storage : </span>
+                  {phoneDetails.mainFeatures.storage}
+                </li>
+                <li>
+                  <span className="text-lg font-semibold mr-2">ChopSet : </span>
+                  {phoneDetails.mainFeatures.chipSet}
+                </li>
+                <li>
+                  <span className="text-lg font-semibold mr-2">Memory : </span>
+                  {phoneDetails.mainFeatures.memory}
+                </li>
+                <li>
+                  <span className="text-lg font-semibold mr-2">Sensors : </span>
+                  <p className="ml-6">
+                    - {phoneDetails.mainFeatures.sensors[0]}
+                  </p>
+                  <p className="ml-6">
+                    - {phoneDetails.mainFeatures.sensors[1]}
+                  </p>
+                  <p className="ml-6">
+                    - {phoneDetails.mainFeatures.sensors[2]}
+                  </p>
+                  <p className="ml-6">
+                    - {phoneDetails.mainFeatures.sensors[3]}
+                  </p>
+                  <p className="ml-6">
+                    - {phoneDetails.mainFeatures.sensors[4]}
+                  </p>
+                  <p className="ml-6">
+                    - {phoneDetails.mainFeatures.sensors[5]}
+                  </p>
+                </li>
               </div>
             </div>
             <div className="mb-4">
-              <span className="font-bold text-gray-700 dark:text-gray-300">
-                Select Size:
+              <span className="text-gray-900 dark:text-gray-300">
+                <span className="text-lg font-semibold mr-2">Release :</span>{" "}
+                {phoneDetails.releaseDate}
               </span>
-              <div className="flex items-center mt-2">
-                <button className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
-                  S
-                </button>
-                <button className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
-                  M
-                </button>
-                <button className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
-                  L
-                </button>
-                <button className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
-                  XL
-                </button>
-                <button className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
-                  XXL
-                </button>
-              </div>
             </div>
             <div>
               <span className="font-bold text-gray-700 dark:text-gray-300">
