@@ -15,11 +15,20 @@ const LatestPhone = () => {
     latestPhones();
   }, [axiosPublic]);
 
+  if(!latestPhone){
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="loading loading-bars loading-lg w-[100px] h-[100px]"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="my-20 ">
       <h2 className="text-6xl mb-16 font-Cinzel font-bold text-center">
         Latest Phones
       </h2>
+      
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {latestPhone.map((phone) => (
           <PhoneCard key={phone._id} phone={phone} />
