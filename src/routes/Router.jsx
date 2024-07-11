@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "/details",
+        path: "/details/:id",
         element: (
           <PrivateRoute>
             <Details />
