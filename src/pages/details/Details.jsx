@@ -51,7 +51,7 @@ const Details = () => {
                         },
                         enlargedImageContainerDimensions: {
                             width: '300%',
-                            height: '150%'
+                            height: '155%'
                         }
                     }} />
             </div>
