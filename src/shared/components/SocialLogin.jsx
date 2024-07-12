@@ -1,11 +1,16 @@
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
   const { googleSignIn, githubSignIn, twitterSignIn, facebookSignIn } =
     useAuth();
   const axiosPublic = useAxiosPublic();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const navigation = useNavigate();
   const handleGoogleSignIn = () => {
     googleSignIn().then((res) => {
       if (res.user) {
@@ -15,7 +20,7 @@ const SocialLogin = () => {
         };
         axiosPublic.post("/users", userInfo);
         toast.success("Login Successful!");
-        // console.log(res.user.email)
+        navigation(from, { replace: true });
       }
     });
   };
@@ -28,6 +33,7 @@ const SocialLogin = () => {
         };
         axiosPublic.post("/users", userInfo);
         toast.success("Login Successful!");
+        navigation(from, { replace: true });
       }
     });
   };
@@ -40,6 +46,7 @@ const SocialLogin = () => {
         };
         axiosPublic.post("/users", userInfo);
         toast.success("Login Successful!");
+        navigation(from, { replace: true });
       }
     });
   };
@@ -52,6 +59,7 @@ const SocialLogin = () => {
         };
         axiosPublic.post("/users", userInfo);
         toast.success("Login Successful!");
+        navigation(from, { replace: true });
       }
     });
   };
