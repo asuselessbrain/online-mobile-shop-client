@@ -31,11 +31,11 @@ const Details = () => {
         <div className="flex flex-col md:flex-row gap-10 justify-between items-center">
           <div className="px-4">
             <div className="rounded-lg mb-4">
-              <img
+              {/* <img
                 className="object-cover mx-auto"
                 src={phoneDetails.image}
                 alt="Product Image"
-              />
+              /> */}
             </div>
             <div className="flex -mx-2 mb-4">
               <div className="px-2">
