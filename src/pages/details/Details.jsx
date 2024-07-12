@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import ReactImageMagnify from 'react-image-magnify';
 
 const Details = () => {
   const axiosPublic = useAxiosPublic();
@@ -36,6 +37,23 @@ const Details = () => {
                 src={phoneDetails.image}
                 alt="Product Image"
               /> */}
+                    <ReactImageMagnify {...{
+                         smallImage: {
+                            alt: 'Wristwatch by Ted Baker London',
+                            isFluidWidth: true,
+                            src: phoneDetails.image,
+                            sizes: '(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px'
+                        },
+                        largeImage: {
+                            src: phoneDetails.image,
+                            width: 1200,
+                            height: 1800
+                        },
+                        enlargedImageContainerDimensions: {
+                            width: '300%',
+                            height: '150%'
+                        }
+                    }} />
             </div>
             <div className="flex -mx-2 mb-4">
               <div className="px-2">
