@@ -1,12 +1,15 @@
 import { Outlet } from "react-router-dom";
-import NavBar from "../shared/navBar/NavBar";
 import Footer from "../shared/footer/Footer";
+import NavigationBar from "../shared/navBar/NavigationBar";
 
 const MainLayout = () => {
   return (
     <div className="max-w-[1440px] mx-auto">
-      <div className="h-[96px]">
+      {/* <div className="h-[96px]">
         <NavBar />
+      </div> */}
+      <div className="h-[96px]">
+        <NavigationBar />
       </div>
       <Outlet />
       <Footer />
