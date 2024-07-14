@@ -25,7 +25,7 @@ const NavigationBar = () => {
   };
   const navigationItem = [
     { id: 1, name: "Home", to: "/" },
-    { id: 2, name: "Phones", to: "/phones" },
+    { id: 2, name: "Phones", to: "/all-phones" },
     { id: 3, name: "About", to: "/about" },
     { id: 4, name: "Contact Us", to: "/contact" },
   ];

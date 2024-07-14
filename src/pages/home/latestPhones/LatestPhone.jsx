@@ -9,7 +9,7 @@ const LatestPhone = () => {
 
   useEffect(() => {
     const latestPhones = async () => {
-      const res = await axiosPublic.get("/phones");
+      const res = await axiosPublic.get("/latest-phones");
       setLatestPhone(res.data);
     };
     latestPhones();
