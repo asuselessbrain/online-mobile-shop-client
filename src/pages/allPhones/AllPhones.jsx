@@ -3,7 +3,9 @@
 const AllPhones = () => {
     return (
         <div>
-            All Phones
+            <div>
+                Brand
+            </div>
         </div>
     );
 };
