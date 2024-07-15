@@ -44,11 +44,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/all-phones",
-        element: (
-          <PrivateRoute>
-            <AllPhones />
-          </PrivateRoute>
-        ),
+        element: <AllPhones />,
       },
     ],
   },

@@ -9,7 +9,6 @@ import { IoCloseSharp } from "react-icons/io5";
 const NavigationBar = () => {
   const { user, logOut } = useAuth();
   const [nav, setNav] = useState(false);
-  const [dropdown, setDropdown] = useState(false);
 
   const handleNav = () => {
     setNav(!nav);
@@ -24,25 +23,11 @@ const NavigationBar = () => {
       toast.success("Sign Out Successful!");
     });
   };
-
-  const handleDropdown = () => {
-    setDropdown(!dropdown);
-  };
-
-
   const navigationItem = [
     { id: 1, name: "Home", to: "/" },
-    { id: 2, name: "Phones", to: "/all-phones" },
+    { id: 2, name: "Brand", to: "/all-phones" },
     { id: 3, name: "About", to: "/about" },
     { id: 4, name: "Contact Us", to: "/contact" },
-    {
-      id: 5,
-      name: "Brand",
-      hasDropdown: true,
-      dropdownItems: [
-        { id: 1, name: "Apple", to: "/brand/apple" },
-      ],
-    },
   ];
   return (
     <div className="fixed max-w-[1440px] w-full z-10 bg-black text-white px-3 md:px-6 lg:px-16 py-4 flex justify-between items-center">
@@ -54,42 +39,20 @@ const NavigationBar = () => {
       </Link>
 
       <ul className="hidden md:flex items-center gap-8">
-      {navigationItem.map((item) =>
-          item.hasDropdown ? (
-            <li
-              key={item.id}
-              className="relative cursor-pointer"
-              onMouseEnter={handleDropdown}
-              onMouseLeave={handleDropdown}
+        {navigationItem.map((item) => (
+          <li key={item.id}>
+            <NavLink
+              to={item.to}
+              className={({ isActive }) =>
+                isActive
+                  ? "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
+                  : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
+              }
             >
-              <span className="hover:text-green-500">{item.name}</span>
-              {dropdown && (
-                <ul className="absolute left-0 mt-0 bg-gray-800 text-white shadow-lg">
-                  {item.dropdownItems.map((dropdownItem) => (
-                    <li key={dropdownItem.id} className="p-2 hover:bg-gray-800 cursor-pointer">
-                      <NavLink to={dropdownItem.to} className="block">
-                        {dropdownItem.name}
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ) : (
-            <li key={item.id}>
-              <NavLink
-                to={item.to}
-                className={({ isActive }) =>
-                  isActive
-                    ? "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
-                    : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
-                }
-              >
-                {item.name}
-              </NavLink>
-            </li>
-          )
-        )}
+              {item.name}
+            </NavLink>
+          </li>
+        ))}
         <li>
           {user ? (
             <button
