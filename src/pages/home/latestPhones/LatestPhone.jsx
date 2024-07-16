@@ -18,10 +18,12 @@ const LatestPhone = () => {
   if(!latestPhone){
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <span className="loading loading-bars loading-lg w-[100px] h-[100px]"></span>
+        <span className="loading loading-spinner loading-lg"></span>
       </div>
     );
   }
+
+  console.log(latestPhone)
 
   return (
     <div className="my-20 ">
