@@ -3,17 +3,29 @@ import { brands } from "./Brand";
 import queryString from "query-string";
 
 const BrandBox = () => {
-    const navigate = useNavigate()
-  const handleBrand = (brand) => {
-    console.log(brand);
-    const brandCategory = { brand: brand };
-    const url = queryString.stringifyUrl({
-      url: "/",
-      query: brandCategory,
-    });
+  //   const navigate = useNavigate()
+  // const handleBrand = (brand) => {
+  //   console.log(brand);
+  //   const brandCategory = { brand: brand };
+  //   const url = queryString.stringifyUrl({
+  //     url: "/",
+  //     query: brandCategory,
+  //   });
 
-    console.log(url);
-    navigate("/all-phones"+url)
+  //   console.log(url);
+  //   navigate("/all-phones"+url)
+  // };
+
+  const navigate = useNavigate();
+
+  const handleBrand = (brand) => {
+    const brandInfo = { brand };
+
+    const url = queryString.stringifyUrl({
+      url: "/all-phones",
+      query: brandInfo,
+    });
+    navigate(url);
   };
   return (
     <div className="pt-4 flex items-center justify-between overflow-x-auto mb-6">
