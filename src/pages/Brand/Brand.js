@@ -1,0 +1,17 @@
+export const brands = [
+    { id: 2, name: "Samsung" },
+    { id: 3, name: "Xiaomi" },
+    { id: 4, name: "Apple" },
+    { id: 5, name: "Google" },
+    { id: 6, name: "Huawei" },
+    { id: 7, name: "Realme" },
+    { id: 8, name: "OnePlus" },
+    { id: 9, name: "Oppo" },
+    { id: 10, name: "Vivo" },
+    { id: 11, name: "Nokia" },
+    { id: 12, name: "Motorola" },
+    { id: 13, name: "Tecno" },
+    { id: 14, name: "Infinix" },
+    { id: 15, name: "Walton" },
+    { id: 16, name: "Symphony" },
+  ];

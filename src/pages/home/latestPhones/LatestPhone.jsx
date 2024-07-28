@@ -1,29 +1,8 @@
-import { useEffect, useState } from "react";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import PhoneCard from "../../../components/PhoneCard";
-// import { Card } from "@material-tailwind/react";
+import propType from "prop-types"
 
-const LatestPhone = () => {
-  const axiosPublic = useAxiosPublic();
-  const [latestPhone, setLatestPhone] = useState([]);
-
-  useEffect(() => {
-    const latestPhones = async () => {
-      const res = await axiosPublic.get("/latest-phones");
-      setLatestPhone(res.data);
-    };
-    latestPhones();
-  }, [axiosPublic]);
-
-  if(!latestPhone){
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
-  }
-
-  console.log(latestPhone)
+const LatestPhone = ({latestPhone}) => {
+  
 
   return (
     <div className="my-20 ">
@@ -39,5 +18,7 @@ const LatestPhone = () => {
     </div>
   );
 };
-
+LatestPhone.propType ={
+  latestPhone: propType.object
+}
 export default LatestPhone;
