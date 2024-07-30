@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import Details from "../pages/details/Details";
 import AllPhones from "../pages/allPhones/AllPhones";
 import About from "../pages/about/About";
+import Dashboard from "../pages/dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -47,5 +48,9 @@ export const router = createBrowserRouter([
         element: <AllPhones />,
       },
     ],
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard />,
   },
 ]);

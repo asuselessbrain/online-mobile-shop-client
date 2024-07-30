@@ -3,18 +3,7 @@ import { brands } from "./Brand";
 import queryString from "query-string";
 
 const BrandBox = () => {
-  //   const navigate = useNavigate()
-  // const handleBrand = (brand) => {
-  //   console.log(brand);
-  //   const brandCategory = { brand: brand };
-  //   const url = queryString.stringifyUrl({
-  //     url: "/",
-  //     query: brandCategory,
-  //   });
-
-  //   console.log(url);
-  //   navigate("/all-phones"+url)
-  // };
+  //   const navigate = useNavig
 
   const navigate = useNavigate();
 

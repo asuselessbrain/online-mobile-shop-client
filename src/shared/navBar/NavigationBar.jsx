@@ -15,8 +15,8 @@ const NavigationBar = () => {
   };
 
   const handleClose = () => {
-    setNav(false)
-  }
+    setNav(false);
+  };
 
   const handleLogOut = () => {
     logOut().then(() => {
@@ -53,14 +53,30 @@ const NavigationBar = () => {
             </NavLink>
           </li>
         ))}
-        <li>
+        <ul>
           {user ? (
-            <button
-              onClick={() => handleLogOut()}
-              className="btn bg-red-500 border-0 text-white hover:bg-red-600"
-            >
-              Sign Out
-            </button>
+            <div className="flex items-center gap-8">
+              <li>
+                <NavLink
+                  to="dashboard"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
+                      : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
+                  }
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+              <li>
+              <button
+                onClick={() => handleLogOut()}
+                className="btn bg-red-500 border-0 text-white hover:bg-red-600"
+              >
+                Sign Out
+              </button>
+              </li>
+            </div>
           ) : (
             <Link to="/login">
               <button className="btn bg-green-500 border-0 text-white hover:bg-green-600">
@@ -68,7 +84,7 @@ const NavigationBar = () => {
               </button>
             </Link>
           )}
-        </li>
+        </ul>
       </ul>
 
       <div className="block md:hidden" onClick={handleNav}>
@@ -92,7 +108,8 @@ const NavigationBar = () => {
         </Link>
         {navigationItem.map((item) => (
           <li key={item.id}>
-            <NavLink onClick={handleClose}
+            <NavLink
+              onClick={handleClose}
               to={item.to}
               className={({ isActive }) =>
                 isActive

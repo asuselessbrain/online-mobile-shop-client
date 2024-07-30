@@ -121,6 +121,18 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block py-2 px-3 text-white bg-blue-700 rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
+                    : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
+                }
+              >
+                Dashboard
+              </NavLink>
+            </li>
+            <li>
               {user ? (
                 <button onClick={() => handleLogOut()} className="btn bg-red-500 border-0 text-white hover:bg-red-600">
                   Sign Out
