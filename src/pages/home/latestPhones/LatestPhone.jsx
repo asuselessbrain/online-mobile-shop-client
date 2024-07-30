@@ -1,11 +1,9 @@
 import PhoneCard from "../../../components/PhoneCard";
-import propType from "prop-types"
+import PropTypes from "prop-types";
 
-const LatestPhone = ({latestPhone}) => {
-  
-
+const LatestPhone = ({ latestPhone }) => {
   return (
-    <div className="my-20 ">
+    <div className="my-20">
       <h2 className="text-6xl mb-16 font-Cinzel font-bold text-center">
         Latest Phones
       </h2>
@@ -18,7 +16,9 @@ const LatestPhone = ({latestPhone}) => {
     </div>
   );
 };
-LatestPhone.propType ={
-  latestPhone: propType.object
-}
+
+LatestPhone.propTypes = {
+  latestPhone: PropTypes.arrayOf()
+};
+
 export default LatestPhone;

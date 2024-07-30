@@ -13,7 +13,7 @@ const Sidebar = () => {
     navigate("/");
   };
   return (
-      <ul className="flex flex-col min-h-screen justify-between top-0 pb-10 left-0 w-64 bg-white h-full border-r">
+      <ul className="flex flex-col min-h-screen fixed justify-between top-0 pb-10 left-0 w-64 bg-white h-full border-r">
         <ul>
           <li>
             <div className="flex items-center justify-center h-14 border-b">
