@@ -8,7 +8,8 @@ import PrivateRoute from "./PrivateRoute";
 import Details from "../pages/details/Details";
 import AllPhones from "../pages/allPhones/AllPhones";
 import About from "../pages/about/About";
-import Dashboard from "../pages/dashboard/Dashboard";
+import Dashboard from "../layouts/Dashboard";
+import AddProduct from "../pages/dashboard/AddProduct/AddProduct";
 
 export const router = createBrowserRouter([
   {
@@ -52,5 +53,6 @@ export const router = createBrowserRouter([
   {
     path: "dashboard",
     element: <Dashboard />,
+    children: [{ path: "dashboard/add-product", element: <AddProduct /> }],
   },
 ]);
