@@ -10,6 +10,7 @@ import AllPhones from "../pages/allPhones/AllPhones";
 import About from "../pages/about/About";
 import Dashboard from "../layouts/Dashboard";
 import AddProduct from "../pages/dashboard/AddProduct/AddProduct";
+import ManageProduct from "../pages/manageProduct/ManageProduct";
 
 export const router = createBrowserRouter([
   {
@@ -55,10 +56,18 @@ export const router = createBrowserRouter([
     element: <Dashboard />,
     children: [
       {
-        path: "dashboard/add-product",
+        path: "add-product",
         element: (
           <PrivateRoute>
             <AddProduct />
+          </PrivateRoute>
+        ),
+      }, //manage-product
+      {
+        path: "manage-product",
+        element: (
+          <PrivateRoute>
+            <ManageProduct />
           </PrivateRoute>
         ),
       },

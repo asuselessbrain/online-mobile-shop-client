@@ -56,6 +56,7 @@ const SignUp = () => {
         const userInfo = {
           name: name,
           email: email,
+          role: 'user',
         };
         axiosPublic.post("/users", userInfo);
         logOut();
@@ -87,6 +88,8 @@ const SignUp = () => {
       setConfType("password");
     }
   };
+
+  
 
   function onChange(value) {
     console.log("Captcha value:", value);
