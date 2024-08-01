@@ -39,6 +39,7 @@ const SignUp = () => {
     console.log(data);
 
     const imageFile = { image: data.image[0] };
+    console.log(imageFile)
     const res = await axios.post(image_hosting_url, imageFile, {
       headers: {
         "content-type": "multipart/form-data",
