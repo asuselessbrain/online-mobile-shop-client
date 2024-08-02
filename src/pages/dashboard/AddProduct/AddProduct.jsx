@@ -3,10 +3,12 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { toast } from "react-toastify";
 import AddProductForm from "./AddProductForm";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const axiosSecure = useAxiosPublic();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const image_upload_api_key = import.meta.env.VITE_Imagebb_API_KEY;
   const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_upload_api_key}`;
@@ -177,6 +179,7 @@ const AddProduct = () => {
           console.log(data);
           if (data.insertedId) {
             toast.success("Item added successfully");
+            navigate('/dashboard/manage-product')
             setLoading(false)
           }
         }

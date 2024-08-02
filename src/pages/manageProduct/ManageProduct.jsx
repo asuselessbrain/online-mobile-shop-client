@@ -2,11 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
 import ProductRow from "./ProductRow";
+import Swal from "sweetalert2";
 
 const ManageProduct = () => {
   const axiosSecure = useAxiosPublic();
   const { user } = useAuth();
-  const { data: products = [], isLoading } = useQuery({
+  const {
+    data: products = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["my_added_product, user?.email"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/my-added-phone/${user?.email}`);
@@ -14,7 +19,34 @@ const ManageProduct = () => {
     },
   });
 
-  console.log(products)
+  console.log(products);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { data } = await axiosSecure.delete(
+          `/delete-my-added-phone/${id}`
+        );
+        refetch()
+
+        if (data.deletedCount > 0) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
 
   if (isLoading) {
     <progress className="progress w-56"></progress>;
@@ -52,7 +84,7 @@ const ManageProduct = () => {
                   >
                     Brand
                   </th>
-                <th
+                  <th
                     scope="col"
                     className="px-5 py-6  border-b border-gray-200 text-white text-left font-semibold uppercase"
                   >
@@ -86,7 +118,12 @@ const ManageProduct = () => {
               </thead>
               <tbody>
                 {products.map((product, index) => (
-                  <ProductRow key={product._id} product={product} index={index} />
+                  <ProductRow
+                    key={product._id}
+                    product={product}
+                    index={index}
+                    handleDelete={handleDelete}
+                  />
                 ))}
               </tbody>
             </table>

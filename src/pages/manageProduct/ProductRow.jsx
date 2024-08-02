@@ -3,7 +3,7 @@
 import { TbCurrencyTaka } from "react-icons/tb";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-const ProductRow = ({ product, index }) => {
+const ProductRow = ({ product, index, handleDelete }) => {
   console.log(product);
   return (
     <tr>
@@ -71,7 +71,7 @@ const ProductRow = ({ product, index }) => {
         {/* Delete modal */}
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white">
-        <span className="relative cursor-pointer inline-block p-[16px] font-semibold text-green-900 leading-tight">
+        <span onClick={()=>handleDelete(product._id)} className="relative cursor-pointer inline-block p-[16px] font-semibold text-green-900 leading-tight">
           <span
             aria-hidden="true"
             className="absolute inset-0 bg-[#B91C1C] rounded-md"
