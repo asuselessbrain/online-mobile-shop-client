@@ -19,8 +19,6 @@ const ManageProduct = () => {
     },
   });
 
-  console.log(products);
-
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -49,7 +47,11 @@ const ManageProduct = () => {
   };
 
   if (isLoading) {
-    <progress className="progress w-56"></progress>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
   }
   return (
     <div className="max-w-[1440px] mx-auto px-4 sm:px-8">

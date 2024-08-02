@@ -8,7 +8,7 @@ const PrivateRoute = ({children}) => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <span className="loading loading-bars loading-lg w-[100px] h-[100px]"></span>
+        <span className="loading loading-spinner loading-lg"></span>
       </div>
     );
   }

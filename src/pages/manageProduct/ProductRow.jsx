@@ -2,9 +2,20 @@
 
 import { TbCurrencyTaka } from "react-icons/tb";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { useState } from "react";
+import UpdateProduct from "./UpdateProduct";
 
 const ProductRow = ({ product, index, handleDelete }) => {
-  console.log(product);
+  let [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white">
@@ -35,10 +46,15 @@ const ProductRow = ({ product, index, handleDelete }) => {
         </p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white">
-        <p className="text-green-600 whitespace-no-wrap">{product?.launch.status}</p>
+        <p className="text-green-600 whitespace-no-wrap">
+          {product?.launch.status}
+        </p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white">
-        <span className="relative cursor-pointer inline-block p-[16px] font-semibold text-green-900 leading-tight">
+        <button
+          onClick={() => openModal()}
+          className="relative cursor-pointer inline-block p-[16px] font-semibold text-green-900 leading-tight"
+        >
           <span
             aria-hidden="true"
             className="absolute inset-0 bg-[#D1A054] rounded-md"
@@ -67,11 +83,16 @@ const ProductRow = ({ product, index, handleDelete }) => {
               />
             </svg>
           </span>
-        </span>
-        {/* Delete modal */}
+        </button>
+        {/* Update modal */}
+        <UpdateProduct isOpen={isOpen} product={product} closeModal={closeModal} />
       </td>
+
       <td className="px-5 py-5 border-b border-gray-200 bg-white">
-        <span onClick={()=>handleDelete(product._id)} className="relative cursor-pointer inline-block p-[16px] font-semibold text-green-900 leading-tight">
+        <span
+          onClick={() => handleDelete(product._id)}
+          className="relative cursor-pointer inline-block p-[16px] font-semibold text-green-900 leading-tight"
+        >
           <span
             aria-hidden="true"
             className="absolute inset-0 bg-[#B91C1C] rounded-md"
