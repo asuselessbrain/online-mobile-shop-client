@@ -2,14 +2,198 @@ import { FaSpinner } from "react-icons/fa6";
 import { FiArrowRight } from "react-icons/fi";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import axios from "axios";
+import { toast } from "react-toastify";
 
+const UpdateProductForm = ({ product, refetch, closeModal }) => {
+  const axiosSecure = useAxiosPublic();
+  const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
 
-const UpdateProductForm = ({product}) => {
-    const [loading, setLoading] = useState(false);
-    const {user} = useAuth()
-    return (
-        <div className="w-full p-10">
-      <form>
+  const image_upload_api_key = import.meta.env.VITE_Imagebb_API_KEY;
+  const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_upload_api_key}`;
+  const handleUpdateFormData = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const phone_name = form?.productName.value;
+    const brand = form?.brand.value;
+    const price = form?.price.value;
+    const category = form?.category.value;
+    const imageFile = { image: form?.image.files[0] };
+
+    // launch
+    const announced = form?.announced.value;
+    const release = form?.release.value;
+    const status = form?.status.value;
+    // network
+    const technology = form?.technology.value;
+    const _2G_Bands = form?._2G_Bands.value;
+    const _3G_Bands = form?._3G_Bands.value;
+    const _4G_Bands = form?._4G_Bands.value;
+    const speed = form?.speed.value;
+    // body
+    const dimensions = form?.dimensions.value;
+    const weight = form?.weight.value;
+    const sim = form?.sim.value;
+    // Display
+    const displayType = form?.displayType.value;
+    const displaySize = form?.displaySize.value;
+    const displayResolution = form?.displayResolution.value;
+    // Platform
+    const os = form?.os.value;
+    const chipset = form?.chipset.value;
+    const cpu = form?.cpu.value;
+    const gpu = form?.gpu.value;
+    // Memory
+    const cardSlot = form?.cardSlot.value;
+    const internal = form?.internal.value;
+    const ram = form?.ram.value;
+    const variant = form?.variant.value;
+    // Main camera
+    const mainCameraDual = form?.mainCameraDual.value;
+    const mainCameraFeatures = form?.mainCameraFeatures.value;
+    const mainCameraVideo = form?.mainCameraVideo.value;
+    // Selfie camera
+    const selfieCameraDual = form?.selfieCameraDual.value;
+    const selfieCameraFeatures = form?.selfieCameraFeatures.value;
+    const selfieCameraVideo = form?.selfieCameraVideo.value;
+    // sound
+    const loudspeaker = form?.loudspeaker.value;
+    const _3_5mmJack = form?._3_5mmJack.value;
+    // Connectivity
+    const wlan = form?.wlan.value;
+    const bluetooth = form?.bluetooth.value;
+    const gps = form?.gps.value;
+    const nfc = form?.nfc.value;
+    const FMradio = form?.FMradio.value;
+    const usb = form?.usb.value;
+    // Features
+    const sensors = form?.sensors.value;
+    // Battery
+    const batteryType = form?.batteryType.value;
+    const batteryCapacity = form?.batteryCapacity.value;
+    // more
+    const madeBy = form?.madeBy.value;
+    const color = form?.color.value;
+    const host_name = form?.host_name.value;
+    const host_email = form?.host_email.value;
+
+    // image hosted in imagebb
+
+    try {
+      setLoading(true);
+      const res = await axios.post(image_hosting_url, imageFile, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+
+      if (res.data.success) {
+        const image = res.data.data.display_url;
+
+        const productInfo = {
+          phone_name,
+          brand,
+          price,
+          category,
+          image,
+          launch: {
+            announced,
+            release,
+            status,
+          },
+          network: {
+            technology,
+            _2G_Bands,
+            _3G_Bands,
+            _4G_Bands,
+            speed,
+          },
+          body: {
+            dimensions,
+            weight,
+            sim,
+          },
+          display: {
+            displayType,
+            displaySize,
+            displayResolution,
+          },
+          platform: {
+            os,
+            chipset,
+            cpu,
+            gpu,
+          },
+          memory: {
+            cardSlot,
+            internal,
+            ram,
+            variant,
+          },
+          mainCamera: {
+            mainCameraDual,
+            mainCameraFeatures,
+            mainCameraVideo,
+          },
+          selfieCamera: {
+            selfieCameraDual,
+            selfieCameraFeatures,
+            selfieCameraVideo,
+          },
+          sound: {
+            loudspeaker,
+            _3_5mmJack,
+          },
+          connectivity: {
+            wlan,
+            bluetooth,
+            gps,
+            nfc,
+            FMradio,
+            usb,
+          },
+          features: {
+            sensors,
+          },
+          battery: {
+            batteryType,
+            batteryCapacity,
+          },
+          more: {
+            madeBy,
+            color,
+          },
+          hostInfo: {
+            host_name,
+            host_email,
+          },
+        };
+        try {
+          const { data } = await axiosSecure.put(
+            `/update-phone-details/${product._id}`,
+            productInfo
+          );
+          console.log(data);
+          if (data.modifiedCount > 0) {
+            toast.success("Updated successfully");
+            refetch()
+            setLoading(false);
+          }
+        } catch (err) {
+          console.log(err.message);
+          setLoading(false);
+        }
+      }
+    } catch (err) {
+      console.log(err.message);
+      setLoading(false);
+    }
+  };
+  return (
+    <div className="w-full p-10">
+      <form onSubmit={handleUpdateFormData}>
         <div className="grid grid-cols-1 gap-4">
           <div className="mb-4">
             <label htmlFor="productName" className="block text-sm font-medium">
@@ -692,8 +876,9 @@ const UpdateProductForm = ({product}) => {
           </div>
         </div>
         <button
-        disabled={loading}
+          disabled={loading}
           type="submit"
+          onClick={closeModal}
           className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500 flex justify-center items-center gap-2 group"
         >
           {!loading && (
@@ -702,11 +887,15 @@ const UpdateProductForm = ({product}) => {
               size={24}
             />
           )}
-          {loading ? <FaSpinner className="animate-spin m-auto" size={24} /> : "Save & Continue"}
+          {loading ? (
+            <FaSpinner className="animate-spin m-auto" size={24} />
+          ) : (
+            "Save & Continue"
+          )}
         </button>
       </form>
     </div>
-    );
+  );
 };
 
 export default UpdateProductForm;

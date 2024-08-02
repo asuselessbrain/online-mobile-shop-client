@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import UpdateProductForm from "./UpdateProductForm";
 
-const UpdateProduct = ({closeModal, isOpen, product}) => {
+const UpdateProduct = ({closeModal, isOpen, product, refetch}) => {
     return (
         <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -26,7 +26,7 @@ const UpdateProduct = ({closeModal, isOpen, product}) => {
                     Update Product
                   </Dialog.Title>
                   <div className="mt-2">
-                    <UpdateProductForm product={product} />
+                    <UpdateProductForm product={product} refetch={refetch} closeModal={closeModal} />
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

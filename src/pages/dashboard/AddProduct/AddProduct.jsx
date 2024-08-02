@@ -15,7 +15,7 @@ const AddProduct = () => {
   const handleFormData = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const productName = form?.productName.value;
+    const phone_name = form?.productName.value;
     const brand = form?.brand.value;
     const price = form?.price.value;
     const category = form?.category.value;
@@ -92,7 +92,7 @@ const AddProduct = () => {
         const image = res.data.data.display_url;
 
         const productInfo = {
-          productName,
+          phone_name,
           brand,
           price,
           category,

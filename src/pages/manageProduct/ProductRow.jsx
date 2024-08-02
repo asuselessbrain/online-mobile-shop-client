@@ -5,7 +5,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { useState } from "react";
 import UpdateProduct from "./UpdateProduct";
 
-const ProductRow = ({ product, index, handleDelete }) => {
+const ProductRow = ({ product, index, handleDelete, refetch }) => {
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -85,7 +85,7 @@ const ProductRow = ({ product, index, handleDelete }) => {
           </span>
         </button>
         {/* Update modal */}
-        <UpdateProduct isOpen={isOpen} product={product} closeModal={closeModal} />
+        <UpdateProduct isOpen={isOpen} product={product} closeModal={closeModal} refetch={refetch} />
       </td>
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white">

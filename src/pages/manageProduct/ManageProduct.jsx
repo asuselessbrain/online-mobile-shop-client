@@ -125,6 +125,7 @@ const ManageProduct = () => {
                     product={product}
                     index={index}
                     handleDelete={handleDelete}
+                    refetch={refetch}
                   />
                 ))}
               </tbody>
