@@ -1,10 +1,10 @@
 import { FaSpinner } from "react-icons/fa6";
 import { FiArrowRight } from "react-icons/fi";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import axios from "axios";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const UpdateProductForm = ({ product, refetch, closeModal }) => {
   const axiosSecure = useAxiosPublic();

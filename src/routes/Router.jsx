@@ -10,7 +10,8 @@ import AllPhones from "../pages/allPhones/AllPhones";
 import About from "../pages/about/About";
 import Dashboard from "../layouts/Dashboard";
 import AddProduct from "../pages/dashboard/AddProduct/AddProduct";
-import ManageProduct from "../pages/manageProduct/ManageProduct";
+import ManageProduct from "../pages/dashboard/manageProduct/ManageProduct";
+import Prodile from "../pages/dashboard/profile/Prodile";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ManageProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <Prodile />
           </PrivateRoute>
         ),
       },

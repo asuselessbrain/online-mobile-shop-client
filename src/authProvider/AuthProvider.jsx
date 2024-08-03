@@ -12,6 +12,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 export const AuthContext = createContext(null);
@@ -75,6 +76,12 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  // reset password
+
+  const resetPassword = (email) =>{
+    return sendPasswordResetEmail(auth, email)
+  }
+
   //   manage user
 
   useEffect(() => {
@@ -98,6 +105,7 @@ const AuthProvider = ({ children }) => {
     twitterSignIn,
     facebookSignIn,
     logOut,
+    resetPassword,
   };
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;
 };

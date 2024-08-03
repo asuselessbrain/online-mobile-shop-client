@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import useAuth from "../../hooks/useAuth";
 import ProductRow from "./ProductRow";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAuth from "../../../hooks/useAuth";
 
 const ManageProduct = () => {
   const axiosSecure = useAxiosPublic();
@@ -59,8 +59,8 @@ const ManageProduct = () => {
         <h2 className="text-[34px] font-bold">
           Total Products: {products.length}
         </h2>
-        <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-          <div className="inline-block min-w-full shadow rounded-t-2xl overflow-hidden">
+        <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
+            <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
             <table className="min-w-full leading-normal">
               <thead className="bg-[#D1A054]">
                 <tr>
