@@ -4,7 +4,15 @@ import useAuth from "../../../hooks/useAuth";
 const Prodile = () => {
   const { user, resetPassword } = useAuth();
 
-  
+  const handleUpdatePassword = (email) => {
+    resetPassword(email)
+    .then(() => {
+       toast.success("Please check your email for reset password")
+      })
+      .catch((error) => {
+        toast.error(error.message)
+      });
+  };
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-white shadow-lg rounded-2xl w-3/5">
