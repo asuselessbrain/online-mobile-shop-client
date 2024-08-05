@@ -12,6 +12,7 @@ import SocialLogin from "../../shared/components/SocialLogin";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import { FaSpinner } from "react-icons/fa";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -19,7 +20,7 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
 
   const navigation = useNavigate();
-  const { signInUser } = useAuth();
+  const { signInUser, loading } = useAuth();
 
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
@@ -146,12 +147,20 @@ const Login = () => {
               onChange={onChange}
             />
             <div className="mt-8">
-              <input
-                type="submit"
-                className="btn bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600 dark:bg-green-500"
-                disabled={disabled}
-                value="Login"
-              />
+              {loading ? (
+                <button
+                  type="submit"
+                  className="btn bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600 dark:bg-green-500"
+                  disabled={disabled}
+                ><FaSpinner className="animate-spin m-auto" size={24} /></button>
+              ) : (
+                <input
+                  type="submit"
+                  className="btn bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600 dark:bg-green-500"
+                  disabled={disabled}
+                  value="Login"
+                />
+              )}
             </div>
           </form>
           <div className="mt-4 flex items-center justify-between">
