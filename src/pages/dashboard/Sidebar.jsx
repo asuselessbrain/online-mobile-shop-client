@@ -7,10 +7,13 @@ import SellerSidebar from "./sidebar/SellerSidebar";
 import AdminSideBar from "./sidebar/AdminSideBar";
 import useRole from "../../hooks/useRole";
 import Spinner from "../../components/Spinner";
+import SidebarNavLinks from "./sidebar/SidebarNavLinks";
+import { CgProfile } from "react-icons/cg";
+import { IoLogOutOutline } from "react-icons/io5";
 
 const Sidebar = ({ isActive, setActive }) => {
   const { logOut } = useAuth();
-  const [role, isLoading] = useRole();
+  const [role] = useRole();
 
   const navigate = useNavigate();
 
@@ -23,8 +26,6 @@ const Sidebar = ({ isActive, setActive }) => {
   const handleToggle = () => {
     setActive(false);
   };
-
-  if (isLoading) return <Spinner />;
 
   return (
     <div>
@@ -53,28 +54,9 @@ const Sidebar = ({ isActive, setActive }) => {
               </div>
             </div>
           </li>
-          <li>
-            <NavLink
-              to="/dashboard"
-              onClick={handleToggle}
-              end
-              className={({ isActive }) =>
-                isActive
-                  ? "relative flex flex-row items-center h-11 focus:outline-none bg-gray-200 text-gray-800 border-l-4 border-[#D1A054] pr-6"
-                  : "relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-100 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-[#D1A054] pr-6"
-              }
-            >
-              <span className="inline-flex justify-center items-center ml-4">
-                <FaHome />
-              </span>
-              <span className="ml-2 text-sm tracking-wide truncate">
-                Dashboard
-              </span>
-            </NavLink>
-          </li>
-          {
-            role === 'seller' && <SellerSidebar handleToggle={handleToggle} /> 
-          }
+          <SidebarNavLinks address="/dashboard" handleToggle={handleToggle} label="Dashboard" icon={FaHome} />
+          <SellerSidebar handleToggle={handleToggle} /> 
+          
           
           {
             role === 'admin' && <AdminSideBar handleToggle={handleToggle} />
@@ -82,57 +64,14 @@ const Sidebar = ({ isActive, setActive }) => {
         </ul>
 
         <ul>
-          <li>
-            <NavLink
-              to="profile"
-              onClick={handleToggle}
-              className={({ isActive }) =>
-                isActive
-                  ? "relative flex flex-row items-center h-11 focus:outline-none bg-gray-200 text-gray-800 border-l-4 border-[#D1A054] pr-6"
-                  : "relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-100 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-[#D1A054] pr-6"
-              }
-            >
-              <span className="inline-flex justify-center items-center ml-4">
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  ></path>
-                </svg>
-              </span>
-              <span className="ml-2 text-sm tracking-wide truncate">
-                Profile
-              </span>
-            </NavLink>
-          </li>
+        <SidebarNavLinks address="profile" handleToggle={handleToggle} label="Profile" icon={CgProfile} />
           <li>
             <button
               onClick={handleLogOut}
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-[#D1A054] pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                  ></path>
-                </svg>
+              <IoLogOutOutline />
               </span>
               <span className="ml-2 text-sm tracking-wide truncate">
                 Logout
