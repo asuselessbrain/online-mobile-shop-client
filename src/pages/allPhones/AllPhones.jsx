@@ -3,6 +3,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import PhoneCard from "../../components/PhoneCard";
 import BrandBox from "../Brand/BrandBox";
 import { useSearchParams } from "react-router-dom";
+import Spinner from "../../components/Spinner";
 
 const AllPhones = () => {
   const axiosPublic = useAxiosPublic();
@@ -19,11 +20,7 @@ const AllPhones = () => {
   }, [axiosPublic, brand]);
 
   if (!phoneData) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
+    return <Spinner />
   }
 
   

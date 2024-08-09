@@ -6,10 +6,11 @@ import { FaHome } from "react-icons/fa";
 import SellerSidebar from "./sidebar/SellerSidebar";
 import AdminSideBar from "./sidebar/AdminSideBar";
 import useRole from "../../hooks/useRole";
+import Spinner from "../../components/Spinner";
 
 const Sidebar = ({ isActive, setActive }) => {
   const { logOut } = useAuth();
-  const [role, isLoading] = useRole()
+  const [role, isLoading] = useRole();
 
   const navigate = useNavigate();
 
@@ -22,6 +23,9 @@ const Sidebar = ({ isActive, setActive }) => {
   const handleToggle = () => {
     setActive(false);
   };
+
+  if (isLoading) return <Spinner />;
+
   return (
     <div>
       {/* Sidebar */}
@@ -68,8 +72,13 @@ const Sidebar = ({ isActive, setActive }) => {
               </span>
             </NavLink>
           </li>
-          <SellerSidebar handleToggle={handleToggle} />
-          <AdminSideBar handleToggle={handleToggle} />
+          {
+            role === 'seller' && <SellerSidebar handleToggle={handleToggle} /> 
+          }
+          
+          {
+            role === 'admin' && <AdminSideBar handleToggle={handleToggle} />
+          }
         </ul>
 
         <ul>
