@@ -14,6 +14,7 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 
@@ -24,16 +25,19 @@ const AuthProvider = ({ children }) => {
   const githubProvider = new GithubAuthProvider();
   const twitterProvider = new TwitterAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
+  const axiosPublic = useAxiosPublic();
 
   // create user
 
   const createUser = (email, password) => {
+    setLoading(true)
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // update user
 
   const updateUser = (name, photoUrl) => {
+    setLoading(true)
     updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photoUrl,
@@ -43,56 +47,77 @@ const AuthProvider = ({ children }) => {
   // sign in with email and password
 
   const signInUser = (email, password) => {
+    setLoading(true)
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   //   google signIn
 
   const googleSignIn = () => {
+    setLoading(true)
     return signInWithPopup(auth, googleProvider);
   };
 
   //   github signIn
 
   const githubSignIn = () => {
+    setLoading(true)
     return signInWithPopup(auth, githubProvider);
   };
 
   // twitter signIN
 
   const twitterSignIn = () => {
+    setLoading(true)
     return signInWithPopup(auth, twitterProvider);
   };
 
   //   facebook signIn
 
   const facebookSignIn = () => {
+    setLoading(true)
     return signInWithPopup(auth, facebookProvider);
   };
 
   // logOut User
 
   const logOut = () => {
+    setLoading(true)
+    axiosPublic.get('http://localhost:3000/logout', {
+      withCredentials:true
+    })
     return signOut(auth);
   };
 
   // reset password
 
-  const resetPassword = (email) =>{
-    return sendPasswordResetEmail(auth, email)
-  }
+  const resetPassword = (email) => {
+    setLoading(true)
+    return sendPasswordResetEmail(auth, email);
+  };
 
   //   manage user
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (user) => {
+    const unSubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
+      if (user) {
+        const userInfo = { email: user?.email };
+        const res = await axiosPublic.post(
+          "http://localhost:3000/jwt",
+          userInfo,{
+            withCredentials:true
+          }
+        );
+        console.log(res.data);
+      }
+
       setLoading(false);
       console.log("user is: ", user);
     });
 
     return () => unSubscribe();
-  }, []);
+  }, [axiosPublic]);
 
   const info = {
     user,

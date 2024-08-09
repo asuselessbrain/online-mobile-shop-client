@@ -1,5 +1,4 @@
 import PhoneCard from "../../../components/PhoneCard";
-import PropTypes from "prop-types";
 
 const LatestPhone = ({ latestPhone }) => {
   return (
@@ -16,9 +15,4 @@ const LatestPhone = ({ latestPhone }) => {
     </div>
   );
 };
-
-LatestPhone.propTypes = {
-  latestPhone: PropTypes.arrayOf()
-};
-
 export default LatestPhone;
