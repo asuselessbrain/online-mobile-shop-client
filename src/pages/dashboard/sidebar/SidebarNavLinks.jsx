@@ -14,7 +14,7 @@ const SidebarNavLinks = ({handleToggle, address, label, icon: Icon}) => {
           }
         >
           <span className="inline-flex justify-center items-center ml-4">
-            <Icon />
+            <Icon size={20} />
           </span>
           <span className="ml-2 text-sm tracking-wide truncate">
             {label}
