@@ -3,6 +3,7 @@ import Banner from "./banner/Banner";
 import { Helmet } from "react-helmet-async";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
+import Spinner from "../../components/Spinner";
 
 const Home = () => {
   const axiosPublic = useAxiosPublic();
@@ -17,11 +18,7 @@ const Home = () => {
   }, [axiosPublic]);
 
   if (latestPhone.length === 0) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
+    return <Spinner />
   }
 
   return (

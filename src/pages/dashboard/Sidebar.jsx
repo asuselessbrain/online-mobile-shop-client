@@ -5,9 +5,11 @@ import { toast } from "react-toastify";
 import { FaHome } from "react-icons/fa";
 import SellerSidebar from "./sidebar/SellerSidebar";
 import AdminSideBar from "./sidebar/AdminSideBar";
+import useRole from "../../hooks/useRole";
 
 const Sidebar = ({ isActive, setActive }) => {
   const { logOut } = useAuth();
+  const [role, isLoading] = useRole()
 
   const navigate = useNavigate();
 
