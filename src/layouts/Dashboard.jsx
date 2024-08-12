@@ -31,7 +31,7 @@ const Dashboard = () => {
         <div className="lg:w-[256px]">
           <Sidebar isActive={isActive} setActive = {setActive} />
         </div>
-        <div className="lg:m-10 flex-1">
+        <div className="lg:m-10 flex-1 w-full">
           <Outlet />
         </div>
       </div>
