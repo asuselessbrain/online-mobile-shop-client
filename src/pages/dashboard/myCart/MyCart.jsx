@@ -2,31 +2,30 @@ import image from "../../../assets/images/about me/Apple-iPhone-16-Pro-Max.webp"
 const MyCart = () => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-x-auto">
-        <thead className="text-xs text-white uppercase bg-[#D1A054] dark:bg-[#D1A054] dark:text-white">
+      <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-x-auto">
+        <thead className="text-white font-semibold uppercase bg-[#D1A054] dark:bg-[#D1A054] dark:text-white">
           <tr>
-          <th scope="col" className="text-center px-6 py-6 font-semibold">
-              Qty
+          <th scope="col" className="text-center px-6 py-6">
             </th>
-            <th scope="col" className="text-center">
+            <th scope="col" className="text-center py-6">
               Product Image
             </th>
-            <th scope="col" className="px-6 py-6 font-semibold">
+            <th scope="col" className="px-6 py-6">
               Product
             </th>
-            <th scope="col" className="px-6 py-6 font-semibold">
+            <th scope="col" className="px-6 py-6">
             Brand
             </th>
-            <th scope="col" className="px-6 py-6 font-semibold">
+            <th scope="col" className="px-6 py-6">
             Category
             </th>
-            <th scope="col" className="px-6 py-6 font-semibold">
+            <th scope="col" className="px-6 py-6">
               Qty
             </th>
-            <th scope="col" className="px-6 py-6 font-semibold">
+            <th scope="col" className="px-6 py-6">
               Price
             </th>
-            <th scope="col" className="px-6 py-6 font-semibold">
+            <th scope="col" className="px-6 py-6">
               Action
             </th>
           </tr>
