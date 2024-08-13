@@ -1,6 +1,6 @@
 import { MdDeleteSweep } from "react-icons/md";
 
-const CartTableRow = ({ item, index }) => {
+const CartTableRow = ({ item, index, handleRemoveToCart }) => {
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
       <td className="py-4">
@@ -81,7 +81,7 @@ const CartTableRow = ({ item, index }) => {
         $ {item.orderDetails.price}
       </td>
       <td className="px-6 py-4">
-        <MdDeleteSweep size={34} className="mx-auto text-red-600 cursor-pointer" />
+        <MdDeleteSweep size={34} onClick={()=>handleRemoveToCart(item._id)} className="mx-auto text-red-600 cursor-pointer" />
       </td>
     </tr>
   );
