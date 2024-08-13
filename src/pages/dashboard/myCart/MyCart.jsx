@@ -14,8 +14,17 @@ const MyCart = () => {
     }
   });
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-x-auto">
+    <div className="relative overflow-x-auto ">
+      <div className="flex flex-col space-y-2 md:flex-row mb-10 justify-between items-center">
+        <h2 className="text-[34px] font-bold">
+        Total orders: {cartData.length}
+        </h2>
+        <h2 className="text-[34px] font-bold">
+        Total Price: $ {cartData.length}
+        </h2>
+        <button className="text-xl font-semibold px-3 py-2 bg-[#D1A054] text-white rounded">Pay</button>
+      </div>
+      <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-x-auto shadow-md sm:rounded-lg">
         <thead className="text-white font-semibold uppercase bg-[#D1A054] dark:bg-[#D1A054] dark:text-white">
           <tr>
             <th scope="col" className="text-center px-6 py-6"></th>
