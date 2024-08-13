@@ -7,7 +7,7 @@ const MyCart = () => {
   const axiosPrivate = useAxiosPublic();
   const {user} = useAuth()
 
-  const { data: cartData = [] } = useQuery({
+  const { data: cartData = [], refetch } = useQuery({
     queryKey: ["cartData"],
     queryFn: async() =>{
       const {data} = await axiosPrivate(`/my-order/${user?.email}`)
@@ -24,14 +24,18 @@ const MyCart = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
+    }).then(async(result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success"
-        });
-        console.log(id)
+        const res = await axiosPrivate.delete(`/delete-item-from-my-cart/${id}`)
+
+        if(res.data.deletedCount > 0){
+          refetch()
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+        }
       }
     });
   }
