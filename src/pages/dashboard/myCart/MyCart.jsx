@@ -1,12 +1,24 @@
-import image from "../../../assets/images/about me/Apple-iPhone-16-Pro-Max.webp"
+import image from "../../../assets/images/about me/Apple-iPhone-16-Pro-Max.webp";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 const MyCart = () => {
+  const axiosPrivate = useAxiosPublic();
+  const {user} = useAuth()
+
+  const { data: cartData = [] } = useQuery({
+    queryKey: ["cartData"],
+    queryFn: async() =>{
+      const {data} = await axiosPrivate(`/my-order/${user?.email}`)
+      return data
+    }
+  });
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-x-auto">
         <thead className="text-white font-semibold uppercase bg-[#D1A054] dark:bg-[#D1A054] dark:text-white">
           <tr>
-          <th scope="col" className="text-center px-6 py-6">
-            </th>
+            <th scope="col" className="text-center px-6 py-6"></th>
             <th scope="col" className="text-center py-6">
               Product Image
             </th>
@@ -14,10 +26,10 @@ const MyCart = () => {
               Product
             </th>
             <th scope="col" className="px-6 py-6">
-            Brand
+              Brand
             </th>
             <th scope="col" className="px-6 py-6">
-            Category
+              Category
             </th>
             <th scope="col" className="px-6 py-6">
               Qty
@@ -32,7 +44,7 @@ const MyCart = () => {
         </thead>
         <tbody>
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-          <td className="py-4">
+            <td className="py-4">
               <p className="text-center">1</p>
             </td>
             <td className="py-4">
