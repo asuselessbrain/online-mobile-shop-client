@@ -1,12 +1,12 @@
 import axios from "axios";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { toast } from "react-toastify";
 import AddProductForm from "./AddProductForm";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 const AddProduct = () => {
-  const axiosSecure = useAxiosPublic();
+  const axiosSecure = useAxiosPrivate();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 

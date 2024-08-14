@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import ProductRow from "./ProductRow";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAuth from "../../../hooks/useAuth";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 const ManageProduct = () => {
-  const axiosSecure = useAxiosPublic();
+  const axiosSecure = useAxiosPrivate();
   const { user } = useAuth();
   const {
     data: products = [],

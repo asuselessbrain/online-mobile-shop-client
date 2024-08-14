@@ -1,10 +1,10 @@
 import useAuth from "../../../hooks/useAuth";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import CartTableRow from "./CartTableRow";
 import Swal from "sweetalert2";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 const MyCart = () => {
-  const axiosPrivate = useAxiosPublic();
+  const axiosPrivate = useAxiosPrivate();
   const {user} = useAuth()
 
   const { data: cartData = [], refetch } = useQuery({

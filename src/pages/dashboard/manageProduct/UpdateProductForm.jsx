@@ -4,10 +4,10 @@ import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 const UpdateProductForm = ({ product, refetch, closeModal }) => {
-  const axiosSecure = useAxiosPublic();
+  const axiosSecure = useAxiosPrivate();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
 

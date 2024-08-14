@@ -1,7 +1,9 @@
+import "./spinerStyle.css";
+
 const Spinner = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <span className="loading loading-spinner loading-lg"></span>
+    <div className="min-h-screen flex justify-center items-center">
+      <span className="loader"></span>
     </div>
   );
 };
