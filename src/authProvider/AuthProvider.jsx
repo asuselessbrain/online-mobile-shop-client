@@ -83,7 +83,7 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true)
-    axiosPublic.get('http://localhost:3000/logout', {
+    axiosPublic.get('/logout', {
       withCredentials:true
     })
     return signOut(auth);
@@ -104,7 +104,7 @@ const AuthProvider = ({ children }) => {
       if (user) {
         const userInfo = { email: user?.email };
         const res = await axiosPublic.post(
-          "http://localhost:3000/jwt",
+          "/jwt",
           userInfo,{
             withCredentials:true
           }
