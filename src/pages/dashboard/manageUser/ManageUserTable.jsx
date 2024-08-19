@@ -3,9 +3,9 @@ import ManageUserTableRow from "./ManageUserTableRow";
 const ManageUserTable = () => {
   return (
     <div className="px-3 py-4 flex justify-center rounded-t-xl">
-      <table className="w-full bg-white shadow-md rounded mb-4">
+      <table className="w-full bg-white shadow-md rounded-xl mb-4">
         <tbody>
-          <tr className="border-b bg-[#D1A054] text-xl text-white">
+          <tr className="border-b bg-[#D1A054] text-xl font-semibold text-white">
             <th className="text-left p-3 px-5">Name</th>
             <th className="text-left p-3 px-5">Email</th>
             <th className="text-left p-3 px-5">Status</th>
