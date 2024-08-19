@@ -5,7 +5,7 @@ import SidebarNavLinks from "./SidebarNavLinks";
 const AdminSideBar = ({handleToggle}) => {
   return (
     <div>
-      <SidebarNavLinks address="add-product" handleToggle={handleToggle} label="Manage User" icon={FaUserCog} />
+      <SidebarNavLinks address="manage-user" handleToggle={handleToggle} label="Manage User" icon={FaUserCog} />
     </div>
   );
 };
