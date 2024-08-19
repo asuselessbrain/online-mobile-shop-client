@@ -1,16 +1,19 @@
 
 
-const ManageUserTableRow = () => {
+const ManageUserTableRow = ({user}) => {
     return (
             <tr className="border-b hover:bg-orange-100 bg-gray-100">
             <td className="p-3 px-5">
-              User.Name
+              {user.name}
             </td>
             <td className="p-3 px-5">
-              User.email
+              {user.email}
             </td>
             <td className="p-3 px-5">
             <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+            </td>
+            <td className="p-3 px-5">
+              {user.role}
             </td>
             <td className="p-3 px-5">
               <select
