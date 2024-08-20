@@ -1,6 +1,6 @@
 import ManageUserTableRow from "./ManageUserTableRow";
 
-const ManageUserTable = ({users}) => {
+const ManageUserTable = ({ users, handleDeleteUser }) => {
   return (
     <div className="px-3 py-4 flex justify-center rounded-t-xl">
       <table className="w-full bg-white shadow-md rounded-xl mb-4">
@@ -13,9 +13,9 @@ const ManageUserTable = ({users}) => {
             <th className="text-left p-3 px-5">Update Role</th>
             <th></th>
           </tr>
-          {
-            users.map(user => <ManageUserTableRow key={user._id} user={user} />)
-          }
+          {users.map((user) => (
+            <ManageUserTableRow key={user._id} user={user} handleDeleteUser={handleDeleteUser} />
+          ))}
         </tbody>
       </table>
     </div>
