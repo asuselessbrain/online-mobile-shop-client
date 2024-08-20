@@ -10,18 +10,22 @@ const SocialLogin = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const handleGoogleSignIn = () => {
-    googleSignIn().then((res) => {
+    googleSignIn().then(async (res) => {
       if (res.user) {
         const userInfo = {
           name: res.user.displayName,
           email: res.user.email,
-          role: 'user'
+          role: "user",
         };
-        axiosPublic.post("/users", userInfo);
-        toast.success("Login Successful!");
-        navigation(from, { replace: true });
+        try {
+          await axiosPublic.post("/users", userInfo);
+          toast.success("Login Successful!");
+          navigate(from, { replace: true });
+        } catch (err) {
+          console.log(err);
+        }
       }
     });
   };
@@ -34,7 +38,7 @@ const SocialLogin = () => {
         };
         axiosPublic.post("/users", userInfo);
         toast.success("Login Successful!");
-        navigation(from, { replace: true });
+        navigate(from, { replace: true });
       }
     });
   };
@@ -47,7 +51,7 @@ const SocialLogin = () => {
         };
         axiosPublic.post("/users", userInfo);
         toast.success("Login Successful!");
-        navigation(from, { replace: true });
+        navigate(from, { replace: true });
       }
     });
   };
@@ -60,7 +64,7 @@ const SocialLogin = () => {
         };
         axiosPublic.post("/users", userInfo);
         toast.success("Login Successful!");
-        navigation(from, { replace: true });
+        navigate(from, { replace: true });
       }
     });
   };
