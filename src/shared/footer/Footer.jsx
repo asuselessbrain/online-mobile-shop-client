@@ -5,7 +5,7 @@ import twiter from '../../assets/images/twitter.png'
 const Footer = () => {
     return (
         <footer className='text-white text-center'>
-        <div className='flex justify-center'>
+        <div className='flex flex-col md:flex-row justify-center'>
           <div className='bg-[#1F2937] flex-1 py-24'>
             <h4 className='text-[32px] font-medium mb-[24px]'>CONTACT US</h4>
             <p className='space-y-2'>

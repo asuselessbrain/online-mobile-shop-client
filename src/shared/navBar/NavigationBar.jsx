@@ -38,7 +38,7 @@ const NavigationBar = () => {
         </span>
       </Link>
 
-      <ul className="hidden md:flex items-center gap-8">
+      <ul className="hidden lg:flex items-center gap-8">
         {navigationItem.map((item) => (
           <li key={item.id}>
             <NavLink
@@ -87,7 +87,7 @@ const NavigationBar = () => {
         </ul>
       </ul>
 
-      <div className="block md:hidden" onClick={handleNav}>
+      <div className="block lg:hidden cursor-pointer" onClick={handleNav}>
         {nav ? <IoCloseSharp size={30} /> : <AiOutlineMenuUnfold size={30} />}
       </div>
       <ul
@@ -113,7 +113,7 @@ const NavigationBar = () => {
               to={item.to}
               className={({ isActive }) =>
                 isActive
-                  ? "block py-4 px-4 text-white font-bold rounded-md bg-transparent text-green-500 border-b-4 border-green-500 p-2 drop-shadow-lg hover:scale-105"
+                  ? "block py-4 px-4 text-white font-bold rounded-md bg-transparent border-b-4 border-green-500 p-2 drop-shadow-lg hover:scale-105"
                   : "block py-4 px-4 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2 border-b duration-300 cursor-pointer border-gray-500"
               }
             >
@@ -121,6 +121,38 @@ const NavigationBar = () => {
             </NavLink>
           </li>
         ))}
+          {user ? (
+            <>
+              <li className="mb-4">
+                <NavLink
+                  to="dashboard"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "block py-4 px-4 text-white font-bold rounded-md bg-transparent border-b-4 border-green-500 p-2 drop-shadow-lg hover:scale-105"
+                  : "block py-4 px-4 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2 border-b duration-300 cursor-pointer border-gray-500"
+                  }
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+              <li>
+              <button
+                onClick={() => handleLogOut()}
+                className="btn bg-red-500 border-0 text-white hover:bg-red-600"
+              >
+                Sign Out
+              </button>
+              </li>
+              </>
+          ) : (
+            <li>
+              <Link to="/login">
+              <button className="btn bg-green-500 border-0 text-white hover:bg-green-600">
+                Sign In
+              </button>
+            </Link>
+            </li>
+          )}
       </ul>
     </div>
   );
