@@ -32,7 +32,7 @@ const NavigationBar = () => {
   return (
     <div className="fixed max-w-[1440px] w-full z-10 bg-black text-white px-3 md:px-6 lg:px-16 py-4 flex justify-between items-center">
       <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src={logo} className="h-16" alt="astra-gadgets logo" />
+        <img src={logo} className="h-12 lg:h-16" alt="astra-gadgets logo" />
         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
           AstraGadgets
         </span>
