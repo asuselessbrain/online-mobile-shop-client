@@ -60,11 +60,11 @@ const Sidebar = ({ isActive, setActive }) => {
             label="Dashboard"
             icon={FaHome}
           />
-          {role.role === "user" && <UserSideBar handleToggle={handleToggle} />}
+          {role === "user" && <UserSideBar handleToggle={handleToggle} />}
 
-          {role.role === "seller" && <SellerSidebar handleToggle={handleToggle} />}
+          {role === "seller" && <SellerSidebar handleToggle={handleToggle} />}
 
-          {role.role === "admin" && <AdminSideBar handleToggle={handleToggle} />}
+          {role === "admin" && <AdminSideBar handleToggle={handleToggle} />}
         </ul>
 
         <ul>
