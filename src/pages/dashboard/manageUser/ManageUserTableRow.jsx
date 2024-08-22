@@ -16,6 +16,7 @@ const ManageUserTableRow = ({ user, handleDeleteUser }) => {
         >
           <option value="user">user</option>
           <option value="admin">admin</option>
+          <option value="seller">seller</option>
         </select>
       </td>
       <td className="p-3 px-5 flex justify-end">
