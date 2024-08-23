@@ -1,4 +1,12 @@
+import { useState } from "react";
+import ManageUserModal from "./ManageUserModal";
+
 const ManageUserTableRow = ({ user, handleDeleteUser }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const modalHandler = () => {
+    console.log("usser updated")
+  }
   return (
     <tr className="border-b hover:bg-orange-100 bg-gray-100">
       <td className="p-3 px-5">{user.name}</td>
@@ -10,24 +18,17 @@ const ManageUserTableRow = ({ user, handleDeleteUser }) => {
       </td>
       <td className="p-3 px-5 capitalize">{user.role}</td>
       <td className="p-3 px-5">
-        <select
-          value="user.role"
-          className="bg-transparent border-b-2 border-gray-300 py-2"
-        >
-          <option value="user">user</option>
-          <option value="admin">admin</option>
-          <option value="seller">seller</option>
-        </select>
-      </td>
-      <td className="p-3 px-5 flex justify-end">
         <button
-          type="button"
-          className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+          onClick={() => setIsOpen(true)}
+          className="text-sm bg-green-200 hover:bg-green-300 py-1 px-2 rounded "
         >
-          Save
+          Update Role
         </button>
+        <ManageUserModal user={user} isOpen={isOpen} setIsOpen={setIsOpen} modalHandler={modalHandler} />
+      </td>
+      <td className="p-3 px-5">
         <button
-        onClick={() => handleDeleteUser(user._id)}
+          onClick={() => handleDeleteUser(user._id)}
           type="button"
           className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
         >
