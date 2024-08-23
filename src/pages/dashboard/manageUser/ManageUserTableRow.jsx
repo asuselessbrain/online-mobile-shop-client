@@ -1,12 +1,35 @@
 import { useState } from "react";
 import ManageUserModal from "./ManageUserModal";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { toast } from "react-toastify";
 
-const ManageUserTableRow = ({ user, handleDeleteUser }) => {
+const ManageUserTableRow = ({ user, handleDeleteUser, refetch }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const axiosPrivate = useAxiosPrivate()
 
-  const modalHandler = () => {
-    console.log("usser updated")
-  }
+  const {mutateAsync} = useMutation({
+    mutationFn: async(updatedUser)=>{
+      const {data} = await axiosPrivate.patch(`/users/role/${user?.email}`,updatedUser)
+      return data
+    },onSuccess(data){
+      refetch()
+      setIsOpen(false)
+      console.log(data)
+      toast.success("User role Updated Successfully");
+    },onError(err){
+      setIsOpen(false)
+      toast.error(err.message)
+    }
+  })
+
+  const modalHandler = async(select) => {
+    const updatedUser = {
+      role: select,
+      status: 'verified',
+    }
+    await mutateAsync(updatedUser)
+  };
   return (
     <tr className="border-b hover:bg-orange-100 bg-gray-100">
       <td className="p-3 px-5">{user.name}</td>
@@ -24,7 +47,12 @@ const ManageUserTableRow = ({ user, handleDeleteUser }) => {
         >
           Update Role
         </button>
-        <ManageUserModal user={user} isOpen={isOpen} setIsOpen={setIsOpen} modalHandler={modalHandler} />
+        <ManageUserModal
+          user={user}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          modalHandler={modalHandler}
+        />
       </td>
       <td className="p-3 px-5">
         <button

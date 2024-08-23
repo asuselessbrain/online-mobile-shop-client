@@ -1,6 +1,6 @@
 import ManageUserTableRow from "./ManageUserTableRow";
 
-const ManageUserTable = ({ users, handleDeleteUser }) => {
+const ManageUserTable = ({ users, handleDeleteUser,refetch }) => {
   return (
     <div className="px-3 py-4 flex justify-center rounded-t-xl">
       <table className="w-full bg-white shadow-md rounded-xl mb-4">
@@ -14,7 +14,7 @@ const ManageUserTable = ({ users, handleDeleteUser }) => {
             <th></th>
           </tr>
           {users.map((user) => (
-            <ManageUserTableRow key={user._id} user={user} handleDeleteUser={handleDeleteUser} />
+            <ManageUserTableRow key={user._id} user={user} handleDeleteUser={handleDeleteUser} refetch={refetch} />
           ))}
         </tbody>
       </table>

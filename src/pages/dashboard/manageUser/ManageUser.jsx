@@ -44,7 +44,7 @@ const ManageUser = () => {
         <h1 className="text-3xl">Users {users.length}</h1>
       </div>
       <div>
-        <ManageUserTable users={users} handleDeleteUser={handleDeleteUser} />
+        <ManageUserTable users={users} handleDeleteUser={handleDeleteUser} refetch={refetch} />
       </div>
     </div>
   );
