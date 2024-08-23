@@ -57,6 +57,7 @@ const SignUp = () => {
           name: name,
           email: email,
           role: 'user',
+          status: 'verified',
         };
         axiosPublic.post("/users", userInfo);
         logOut();

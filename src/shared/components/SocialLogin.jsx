@@ -18,6 +18,7 @@ const SocialLogin = () => {
           name: res.user.displayName,
           email: res.user.email,
           role: "user",
+          status: "verified",
         };
         try {
           await axiosPublic.post("/users", userInfo);

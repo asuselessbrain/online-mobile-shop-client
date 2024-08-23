@@ -3,12 +3,12 @@ const ManageUserTableRow = ({ user, handleDeleteUser }) => {
     <tr className="border-b hover:bg-orange-100 bg-gray-100">
       <td className="p-3 px-5">{user.name}</td>
       <td className="p-3 px-5">{user.email}</td>
-      <td className="p-3 px-5">
+      <td className="p-3 px-5 capitalize">
         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-          Active
+          {user.status}
         </span>
       </td>
-      <td className="p-3 px-5">{user.role}</td>
+      <td className="p-3 px-5 capitalize">{user.role}</td>
       <td className="p-3 px-5">
         <select
           value="user.role"
