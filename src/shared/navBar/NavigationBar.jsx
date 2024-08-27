@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 const NavigationBar = () => {
   const { user, logOut } = useAuth();
@@ -66,6 +67,15 @@ const NavigationBar = () => {
                   }
                 >
                   Dashboard
+                </NavLink>
+              </li>
+              <li>
+              <NavLink
+                  to="dashboard"
+                  className="block text-white rounded-md md:bg-transparent md:text-white md:border-b-0"
+                >
+                  <MdOutlineShoppingCart size={30} />
+
                 </NavLink>
               </li>
               <li>
