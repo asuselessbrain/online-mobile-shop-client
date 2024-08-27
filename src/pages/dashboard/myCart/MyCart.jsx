@@ -3,17 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import CartTableRow from "./CartTableRow";
 import Swal from "sweetalert2";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import useCart from "../../../hooks/useCart";
 const MyCart = () => {
   const axiosPrivate = useAxiosPrivate();
-  const {user} = useAuth()
-
-  const { data: cartData = [], refetch } = useQuery({
-    queryKey: ["cartData"],
-    queryFn: async() =>{
-      const {data} = await axiosPrivate(`/my-order/${user?.email}`)
-      return data
-    }
-  });
+  const [cartData, refetch] = useCart()
 
   const handleRemoveToCart = (id) => {
     Swal.fire({
