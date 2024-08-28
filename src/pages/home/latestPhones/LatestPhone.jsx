@@ -1,4 +1,5 @@
 import PhoneCard from "../../../components/PhoneCard";
+import useCart from "../../../hooks/useCart";
 
 const LatestPhone = ({ latestPhone }) => {
   return (

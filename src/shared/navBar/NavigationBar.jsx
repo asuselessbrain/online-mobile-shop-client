@@ -6,10 +6,12 @@ import { useState } from "react";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import useCart from "../../hooks/useCart";
 
 const NavigationBar = () => {
   const { user, logOut } = useAuth();
   const [nav, setNav] = useState(false);
+  const [cartData, refetch] = useCart();
 
   const handleNav = () => {
     setNav(!nav);
@@ -70,21 +72,21 @@ const NavigationBar = () => {
                 </NavLink>
               </li>
               <li>
-              <NavLink
+                <NavLink
                   to="dashboard"
                   className="block text-white rounded-md md:bg-transparent md:text-white md:border-b-0"
                 >
                   <MdOutlineShoppingCart size={30} />
-
+                  <h2>{cartData.length}</h2>
                 </NavLink>
               </li>
               <li>
-              <button
-                onClick={() => handleLogOut()}
-                className="btn bg-red-500 border-0 text-white hover:bg-red-600"
-              >
-                Sign Out
-              </button>
+                <button
+                  onClick={() => handleLogOut()}
+                  className="btn bg-red-500 border-0 text-white hover:bg-red-600"
+                >
+                  Sign Out
+                </button>
               </li>
             </div>
           ) : (
@@ -131,38 +133,38 @@ const NavigationBar = () => {
             </NavLink>
           </li>
         ))}
-          {user ? (
-            <>
-              <li className="mb-4">
-                <NavLink
-                  to="dashboard"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "block py-4 px-4 text-white font-bold rounded-md bg-transparent border-b-4 border-green-500 p-2 drop-shadow-lg hover:scale-105"
-                  : "block py-4 px-4 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2 border-b duration-300 cursor-pointer border-gray-500"
-                  }
-                >
-                  Dashboard
-                </NavLink>
-              </li>
-              <li>
+        {user ? (
+          <>
+            <li className="mb-4">
+              <NavLink
+                to="dashboard"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block py-4 px-4 text-white font-bold rounded-md bg-transparent border-b-4 border-green-500 p-2 drop-shadow-lg hover:scale-105"
+                    : "block py-4 px-4 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2 border-b duration-300 cursor-pointer border-gray-500"
+                }
+              >
+                Dashboard
+              </NavLink>
+            </li>
+            <li>
               <button
                 onClick={() => handleLogOut()}
                 className="btn bg-red-500 border-0 text-white hover:bg-red-600"
               >
                 Sign Out
               </button>
-              </li>
-              </>
-          ) : (
-            <li>
-              <Link to="/login">
+            </li>
+          </>
+        ) : (
+          <li>
+            <Link to="/login">
               <button className="btn bg-green-500 border-0 text-white hover:bg-green-600">
                 Sign In
               </button>
             </Link>
-            </li>
-          )}
+          </li>
+        )}
       </ul>
     </div>
   );

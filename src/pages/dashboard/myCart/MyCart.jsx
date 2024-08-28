@@ -1,5 +1,3 @@
-import useAuth from "../../../hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
 import CartTableRow from "./CartTableRow";
 import Swal from "sweetalert2";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
