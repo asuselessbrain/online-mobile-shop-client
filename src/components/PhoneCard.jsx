@@ -4,12 +4,14 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { toast } from "react-toastify";
+import useCart from "../hooks/useCart";
 
 /* eslint-disable react/prop-types */
 const PhoneCard = ({ phone }) => {
   const { phone_name, image, price, _id } = phone;
   const axiosSecure = useAxiosPublic();
   const { user } = useAuth();
+  const [, refetch] = useCart()
 
   const handleAddToCart = async (id) => {
     // /my-cart
@@ -24,6 +26,7 @@ const PhoneCard = ({ phone }) => {
       const res = await axiosSecure.post("/my-cart", cartInfo);
 
       if (res.data.acknowledged) {
+        refetch()
         toast.success("Added to cart Successfully!");
       }
     } catch (err) {

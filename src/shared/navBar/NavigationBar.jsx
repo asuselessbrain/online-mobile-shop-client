@@ -11,7 +11,7 @@ import useCart from "../../hooks/useCart";
 const NavigationBar = () => {
   const { user, logOut } = useAuth();
   const [nav, setNav] = useState(false);
-  const [cartData, refetch] = useCart();
+  const [cartData] = useCart();
 
   const handleNav = () => {
     setNav(!nav);
@@ -74,10 +74,10 @@ const NavigationBar = () => {
               <li>
                 <NavLink
                   to="dashboard"
-                  className="block text-white rounded-md md:bg-transparent md:text-white md:border-b-0"
+                  className="flex text-white relative rounded-md md:bg-transparent md:text-white md:border-b-0"
                 >
-                  <MdOutlineShoppingCart size={30} />
-                  <h2>{cartData.length}</h2>
+                  <MdOutlineShoppingCart size={34} />
+                  <h2 className="absolute -right-4 -top-4 bg-green-400 rounded-full px-2 py-1">{cartData.length}</h2>
                 </NavLink>
               </li>
               <li>
