@@ -77,7 +77,7 @@ const NavigationBar = () => {
                   className="flex text-white relative rounded-md md:bg-transparent md:text-white md:border-b-0"
                 >
                   <MdOutlineShoppingCart size={34} />
-                  <h2 className="absolute -right-4 -top-4 bg-green-400 rounded-full px-2 py-1">{cartData.length}</h2>
+                  <h2 className="absolute -right-3 -top-3 bg-red-500 rounded-full text-black font-semibold text-[12px] px-2 py-[2px]">{cartData.length}</h2>
                 </NavLink>
               </li>
               <li>
