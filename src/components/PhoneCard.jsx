@@ -27,18 +27,29 @@ const PhoneCard = ({ phone }) => {
       const isExistingRes = await axiosSecure(`/my-cart/${user.email}/${id}`);
 
       if (isExistingRes.data) {
-        const existingProductId = isExistingRes.data._id
+        const existingProductId = isExistingRes.data._id;
         const updateInfo = {
           ...cartInfo,
           quantity: isExistingRes.data.quantity + 1,
         };
-      }
-      // const res = await axiosSecure.post("/my-cart", cartInfo);
+        const updatedRes = await axiosSecure.put(
+          `/my-cart/${existingProductId}`,
+          updateInfo
+        );
 
-      // if (res.data.acknowledged) {
-      //   refetch()
-      //   toast.success("Added to cart Successfully!");
-      // }
+        if (updatedRes.data.modifiedCount > 0) {
+          refetch();
+          toast.success("Added to cart Successfully!");
+        }
+      }
+      else{
+        const res = await axiosSecure.post("/my-cart", cartInfo);
+
+      if (res.data.acknowledged) {
+        refetch()
+        toast.success("Added to cart Successfully!");
+      }
+      }
     } catch (err) {
       toast.error(err.message);
     }

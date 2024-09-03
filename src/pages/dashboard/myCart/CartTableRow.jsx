@@ -1,18 +1,44 @@
 import { useState } from "react";
 import { MdDeleteSweep } from "react-icons/md";
+import useCart from "../../../hooks/useCart";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 const CartTableRow = ({ item, index, handleRemoveToCart }) => {
   const [quantity, setQuantity] = useState(item.quantity);
+  
+  const axiosSecure = useAxiosPrivate()
+  const [, refetch] = useCart();
 
-  const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-  };
+  const handleIncrement = async () => {
+    const updatedQuantity = item.quantity + 1
 
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
+    setQuantity(updatedQuantity)
+    const updateInfo = {
+      quantity: updatedQuantity,
+    };
+    const updatedRes = await axiosSecure.put(`/my-cart/${item._id}`, updateInfo);
+  
+    if (updatedRes.data.modifiedCount > 0) {
+      refetch();
     }
   };
+  
+  const handleDecrement = async () => { // Changed from a commented function to an async function
+
+    const updatedQuantity = item.quantity - 1
+    setQuantity(updatedQuantity)
+    if (item.quantity > 1) { // Added condition to check if quantity is greater than 1
+      const updateInfo = { 
+        quantity: updatedQuantity // Changed to decrement quantity
+      };
+      const updatedRes = await axiosSecure.put(`/my-cart/${item._id}`, updateInfo); // Added PUT request for decrementing
+  
+      if (updatedRes.data.modifiedCount > 0) { // Added check for successful update
+        refetch(); // Added refetch call to update data
+      }
+    }
+  };
+  
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
       <td className="py-4">
@@ -34,7 +60,7 @@ const CartTableRow = ({ item, index, handleRemoveToCart }) => {
       <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
         {item.orderDetails.category}
       </td>
-      <td className="px-6 py-4 font-semibold text-red-600 dark:text-red-600">
+      <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
         $ {item.orderDetails.price}
       </td>
       <td className="px-6 py-4">
@@ -93,9 +119,7 @@ const CartTableRow = ({ item, index, handleRemoveToCart }) => {
         </div>
       </td>
       <td className="px-6 py-4 font-semibold text-red-600 dark:text-red-600">
-        $ {
-          quantity*item.orderDetails.price
-        }
+        $ {quantity * item.orderDetails.price}
       </td>
       <td className="px-6 py-4">
         <MdDeleteSweep
