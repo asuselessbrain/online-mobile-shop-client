@@ -4,7 +4,11 @@ import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useCart from "../../../hooks/useCart";
 const MyCart = () => {
   const axiosPrivate = useAxiosPrivate();
-  const [cartData, refetch] = useCart()
+  const [cartData, refetch] = useCart();
+
+  const totalPrice = cartData.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue.quantity * currentValue.orderDetails.price;
+  }, 0);
 
   const handleRemoveToCart = (id) => {
     Swal.fire({
@@ -14,32 +18,34 @@ const MyCart = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then(async(result) => {
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axiosPrivate.delete(`/delete-item-from-my-cart/${id}`)
+        const res = await axiosPrivate.delete(
+          `/delete-item-from-my-cart/${id}`
+        );
 
-        if(res.data.deletedCount > 0){
-          refetch()
+        if (res.data.deletedCount > 0) {
+          refetch();
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
-            icon: "success"
+            icon: "success",
           });
         }
       }
     });
-  }
+  };
   return (
     <div className="relative overflow-x-auto ">
       <div className="flex flex-col space-y-2 md:flex-row mb-10 justify-between items-center">
         <h2 className="text-[34px] font-bold">
-        Total orders: {cartData.length}
+          Total orders: {cartData.length}
         </h2>
-        <h2 className="text-[34px] font-bold">
-        Total Price: $ {cartData.length}
-        </h2>
-        <button className="text-xl font-semibold px-3 py-2 bg-[#D1A054] text-white rounded">Pay</button>
+        <h2 className="text-[34px] font-bold">Total Price: $ {totalPrice}</h2>
+        <button className="text-xl font-semibold px-3 py-2 bg-[#D1A054] text-white rounded">
+          Pay
+        </button>
       </div>
       <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-x-auto shadow-md sm:rounded-lg">
         <thead className="text-white font-semibold uppercase bg-[#D1A054] dark:bg-[#D1A054] dark:text-white">
@@ -72,10 +78,14 @@ const MyCart = () => {
           </tr>
         </thead>
         <tbody>
-          {
-            cartData.map((item, index)=> <CartTableRow item={item} index={index} handleRemoveToCart={handleRemoveToCart} key={item._id} /> )
-          }
-          
+          {cartData.map((item, index) => (
+            <CartTableRow
+              item={item}
+              index={index}
+              handleRemoveToCart={handleRemoveToCart}
+              key={item._id}
+            />
+          ))}
         </tbody>
       </table>
     </div>
