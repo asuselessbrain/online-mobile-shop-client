@@ -2,6 +2,7 @@ import CartTableRow from "./CartTableRow";
 import Swal from "sweetalert2";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useCart from "../../../hooks/useCart";
+import { Link } from "react-router-dom";
 const MyCart = () => {
   const axiosPrivate = useAxiosPrivate();
   const [cartData, refetch] = useCart();
@@ -43,9 +44,12 @@ const MyCart = () => {
           Total orders: {cartData.length}
         </h2>
         <h2 className="text-[34px] font-bold">Total Price: $ {totalPrice}</h2>
-        <button className="text-xl font-semibold px-3 py-2 bg-[#D1A054] text-white rounded">
+        {
+          cartData.length ? <Link to="/dashboard/payment" className="text-xl font-semibold px-3 py-2 bg-[#D1A054] text-white rounded">
           Pay
-        </button>
+        </Link>: <button disabled className="text-xl btn font-semibold px-3 py-2 bg-[#D1A054] text-white rounded">
+          Pay</button>
+        }
       </div>
       <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-x-auto shadow-md sm:rounded-lg">
         <thead className="text-white font-semibold uppercase bg-[#D1A054] dark:bg-[#D1A054] dark:text-white">

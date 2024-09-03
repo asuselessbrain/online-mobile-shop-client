@@ -73,7 +73,7 @@ const NavigationBar = () => {
               </li>
               <li>
                 <NavLink
-                  to="dashboard"
+                  to="dashboard/my-cart"
                   className="flex text-white relative rounded-md md:bg-transparent md:text-white md:border-b-0"
                 >
                   <MdOutlineShoppingCart size={34} />

@@ -14,6 +14,7 @@ import ManageProduct from "../pages/dashboard/manageProduct/ManageProduct";
 import Prodile from "../pages/dashboard/profile/Prodile";
 import MyCart from "../pages/dashboard/myCart/MyCart";
 import ManageUser from "../pages/dashboard/manageUser/ManageUser";
+import Payment from "../pages/dashboard/payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +88,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyCart />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "payment",
+        element: (
+          <PrivateRoute>
+            <Payment />
           </PrivateRoute>
         ),
       },
