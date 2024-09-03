@@ -11,7 +11,7 @@ const PhoneCard = ({ phone }) => {
   const { phone_name, image, price, _id } = phone;
   const axiosSecure = useAxiosPublic();
   const { user } = useAuth();
-  const [, refetch] = useCart()
+  const [, refetch] = useCart();
 
   const handleAddToCart = async (id) => {
     // /my-cart
@@ -24,12 +24,21 @@ const PhoneCard = ({ phone }) => {
       },
     };
     try {
-      const res = await axiosSecure.post("/my-cart", cartInfo);
+      const isExistingRes = await axiosSecure(`/my-cart/${user.email}/${id}`);
 
-      if (res.data.acknowledged) {
-        refetch()
-        toast.success("Added to cart Successfully!");
+      if (isExistingRes.data) {
+        const existingProductId = isExistingRes.data._id
+        const updateInfo = {
+          ...cartInfo,
+          quantity: isExistingRes.data.quantity + 1,
+        };
       }
+      // const res = await axiosSecure.post("/my-cart", cartInfo);
+
+      // if (res.data.acknowledged) {
+      //   refetch()
+      //   toast.success("Added to cart Successfully!");
+      // }
     } catch (err) {
       toast.error(err.message);
     }

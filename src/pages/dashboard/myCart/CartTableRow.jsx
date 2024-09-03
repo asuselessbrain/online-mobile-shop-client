@@ -93,7 +93,9 @@ const CartTableRow = ({ item, index, handleRemoveToCart }) => {
         </div>
       </td>
       <td className="px-6 py-4 font-semibold text-red-600 dark:text-red-600">
-        $ {item.orderDetails.price}
+        $ {
+          quantity*item.orderDetails.price
+        }
       </td>
       <td className="px-6 py-4">
         <MdDeleteSweep
