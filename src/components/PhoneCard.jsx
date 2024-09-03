@@ -17,6 +17,7 @@ const PhoneCard = ({ phone }) => {
     // /my-cart
     const cartInfo = {
       productId: id,
+      quantity: 1,
       userInfo: {
         name: user?.displayName,
         email: user?.email,

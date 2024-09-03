@@ -58,10 +58,13 @@ const MyCart = () => {
               Category
             </th>
             <th scope="col" className="px-6 py-6">
+              Price
+            </th>
+            <th scope="col" className="px-6 py-6">
               Qty
             </th>
             <th scope="col" className="px-6 py-6">
-              Price
+              Total Price
             </th>
             <th scope="col" className="px-6 py-6 text-center">
               Action
