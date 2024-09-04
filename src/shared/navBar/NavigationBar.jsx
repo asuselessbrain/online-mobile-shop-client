@@ -6,22 +6,12 @@ import { useState } from "react";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useQuery } from "@tanstack/react-query";
+import useCart from "../../hooks/useCart";
 
 const NavigationBar = () => {
   const { user, logOut } = useAuth();
   const [nav, setNav] = useState(false);
-
-  const axiosPrivate = useAxiosPrivate();
-
-  const { data: cartData = [] } = useQuery({
-    queryKey: ["cartData", user?.email],
-    queryFn: async () => {
-      const { data } = await axiosPrivate(`/my-order/${user?.email}`);
-      return data;
-    },
-  });
+  const [cartData] = useCart();
 
   const handleNav = () => {
     setNav(!nav);
