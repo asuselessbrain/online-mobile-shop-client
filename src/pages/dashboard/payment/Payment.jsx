@@ -4,7 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements, } from "@stripe/react-stripe-js";
 import PaymentForm from "./PaymentForm";
 
-const stripePromise = loadStripe('pk_test_51PvDzQP9iYm2H4Lsc4funaW5ZuBueH9knGBwkwJGMUXWiw0Iq9JENF2OVCqu0xhLNAv5R6vDUN5r7xZi5mZFdy9300Ozmn67cw');
+const stripePromise = loadStripe(import.meta.env.VITE_Stripe_Publishable_Key);
 
 const Payment = ({ isOpen, closeModal }) => {
   return (
