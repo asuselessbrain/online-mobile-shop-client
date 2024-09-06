@@ -3,12 +3,18 @@ import Swal from "sweetalert2";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useCart from "../../../hooks/useCart";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import Payment from "../payment/Payment";
+
 const MyCart = () => {
   const axiosPrivate = useAxiosPrivate();
   const [cartData, refetch] = useCart();
+  const [isOpen, setIsOpen] = useState(false);
 
   const totalPrice = cartData.reduce((previousValue, currentValue) => {
-    return previousValue + currentValue.quantity * currentValue.orderDetails.price;
+    return (
+      previousValue + currentValue.quantity * currentValue.orderDetails.price
+    );
   }, 0);
 
   const handleRemoveToCart = (id) => {
@@ -37,6 +43,14 @@ const MyCart = () => {
       }
     });
   };
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
   return (
     <div className="relative overflow-x-auto ">
       <div className="flex flex-col space-y-2 md:flex-row mb-10 justify-between items-center">
@@ -44,12 +58,26 @@ const MyCart = () => {
           Total orders: {cartData.length}
         </h2>
         <h2 className="text-[34px] font-bold">Total Price: $ {totalPrice}</h2>
-        {
-          cartData.length ? <Link to="/dashboard/payment" className="text-xl font-semibold px-3 py-2 bg-[#D1A054] text-white rounded">
-          Pay
-        </Link>: <button disabled className="text-xl btn font-semibold px-3 py-2 bg-[#D1A054] text-white rounded">
-          Pay</button>
-        }
+        {cartData.length ? (
+          <>
+            <button
+              onClick={openModal}
+              to="/dashboard/payment"
+              className="text-xl font-semibold px-3 py-2 bg-[#D1A054] text-white rounded"
+            >
+              Pay Now
+            </button>
+
+            <Payment isOpen={isOpen} closeModal={closeModal} />
+          </>
+        ) : (
+          <button
+            disabled
+            className="text-xl btn font-semibold px-3 py-2 bg-[#D1A054] text-white rounded"
+          >
+            Pay
+          </button>
+        )}
       </div>
       <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-x-auto shadow-md sm:rounded-lg">
         <thead className="text-white font-semibold uppercase bg-[#D1A054] dark:bg-[#D1A054] dark:text-white">
