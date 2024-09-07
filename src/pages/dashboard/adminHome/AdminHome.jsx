@@ -16,13 +16,15 @@ import {
   Legend,
 } from "recharts";
 import useAuth from "../../../hooks/useAuth";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { useQuery } from "@tanstack/react-query";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red"];
 
 const AdminHome = () => {
-
-  const {user} = useAuth()
+  const { user } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
   // TODO: remove after connect database
   const data = [
     {
@@ -87,11 +89,11 @@ const AdminHome = () => {
   };
 
   const PyData = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
-    { name: 'Group E', value: 250 },
+    { name: "Group A", value: 400 },
+    { name: "Group B", value: 300 },
+    { name: "Group C", value: 300 },
+    { name: "Group D", value: 200 },
+    { name: "Group E", value: 250 },
   ];
 
   const RADIAN = Math.PI / 180;
@@ -121,35 +123,45 @@ const AdminHome = () => {
     );
   };
 
+  const { data: adminStats } = useQuery({
+    queryKey: ["admin-stats"],
+    queryFn: async () => {
+      const { data } = await axiosPrivate.get("/admin-stats");
+      return data;
+    },
+  });
+
   return (
     <div className="p-2 min-h-[calc(100vh-80px)] flex flex-col items-stretch justify-center">
-      <h2 className="text-4xl mb-10 font-semibold">Hi {user?.displayName}, Welcome Back!</h2>
+      <h2 className="text-4xl mb-10 font-semibold">
+        Hi {user?.displayName}, Welcome Back!
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
         <div className="flex items-center justify-center gap-4 p-6 md:p-[56px] bg-gradient-to-r from-[#BB34F5] to-[#FCDBFF] text-white rounded-xl">
           <IoWalletSharp size={52} />
           <div>
-            <h3 className="font-extrabold text-5xl">10000</h3>
+            <h3 className="font-extrabold text-5xl">{adminStats.revenue}</h3>
             <h5 className="text-2xl">Revenue</h5>
           </div>
         </div>
         <div className="flex items-center justify-center gap-4 p-6 md:p-[56px] bg-gradient-to-r from-[#D3A256] to-[#FDE8C0] text-white rounded-xl">
           <FaUsers size={52} />
           <div>
-            <h3 className="font-extrabold text-5xl">10000</h3>
+            <h3 className="font-extrabold text-5xl">{adminStats.totalUser}</h3>
             <h5 className="text-2xl">Customers</h5>
           </div>
         </div>
         <div className="flex items-center justify-center gap-4 p-6 md:p-[56px] bg-gradient-to-r from-[#FE4880] to-[#FECDE9] text-white rounded-xl">
           <MdProductionQuantityLimits size={52} />
           <div>
-            <h3 className="font-extrabold text-5xl">10000</h3>
+            <h3 className="font-extrabold text-5xl">{adminStats.totalProduct}</h3>
             <h5 className="text-2xl">Products</h5>
           </div>
         </div>
         <div className="flex items-center justify-center gap-4 p-6 md:p-[56px] bg-gradient-to-r from-[#6AAEFF] to-[#B6F7FF] text-white rounded-xl">
           <TbTruckDelivery size={52} />
           <div>
-            <h3 className="font-extrabold text-5xl">10000</h3>
+            <h3 className="font-extrabold text-5xl">{adminStats.totalOrder}</h3>
             <h5 className="text-2xl">Orders</h5>
           </div>
         </div>
