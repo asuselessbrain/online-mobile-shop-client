@@ -63,9 +63,8 @@ const PaymentForm = () => {
 
     // confirm card payment
 
-    const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
-      clientSecret,
-      {
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: card,
           billing_details: {
@@ -73,12 +72,14 @@ const PaymentForm = () => {
             name: user?.displayName || "anonymous",
           },
         },
-      }
-    );
+      });
 
     if (confirmError) {
       // Check for specific error types if they exist
-      if (confirmError.type === "card_error" || confirmError.type === "validation_error") {
+      if (
+        confirmError.type === "card_error" ||
+        confirmError.type === "validation_error"
+      ) {
         setError(confirmError.message);
       } else {
         // Handle other potential errors
@@ -86,6 +87,24 @@ const PaymentForm = () => {
       }
     } else {
       console.log("PaymentIntent", paymentIntent);
+
+      if (paymentIntent.status === "succeeded") {
+        const payment = {
+          email: user?.email,
+          price,
+          date: new Date(),
+          cartIds: cartData.map((item) => item._id),
+          productIds: cartData.map((item) => item.productId),
+          quantity: cartData.map((item) => item.quantity),
+          transactionId: paymentIntent.id,
+          status: "pending",
+        };
+
+        const res = await axiosPrivate.post("/payments", payment);
+
+        console.log(res.data);
+      }
+
       // Handle successful payment here
     }
   };

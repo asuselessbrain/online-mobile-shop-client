@@ -6,7 +6,7 @@ import PaymentForm from "./PaymentForm";
 
 const stripePromise = loadStripe(import.meta.env.VITE_Stripe_Publishable_Key);
 
-const Payment = ({ isOpen, closeModal }) => {
+const Payment = ({ isOpen, closeModal, totalPrice, cartData }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -36,10 +36,16 @@ const Payment = ({ isOpen, closeModal }) => {
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 mb-6"
+                  className="text-xl font-bold leading-6 text-gray-900 mb-6 text-center"
                 >
-                  Pay Now
+                  Confirm Order
                 </Dialog.Title>
+
+                {
+                  cartData.map(item=> <div key={item._id} className="flex items-center gap-1 mb-1"><h3 className="text-lg font-semibold">{item.orderDetails.phone_name}</h3> <p>({item.quantity})</p></div>)
+                }
+
+                <h2 className="text-red-500 mb-6"><span className="text-lg font-semibold text-gray-900 dark:text-gray-100">Total Price: </span>{totalPrice}</h2>
 
                 <Elements stripe={stripePromise}>
                   <PaymentForm />

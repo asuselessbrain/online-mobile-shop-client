@@ -68,7 +68,7 @@ const MyCart = () => {
               Pay Now
             </button>
 
-            <Payment isOpen={isOpen} closeModal={closeModal} />
+            <Payment isOpen={isOpen} closeModal={closeModal} totalPrice={totalPrice} cartData={cartData} />
           </>
         ) : (
           <button
