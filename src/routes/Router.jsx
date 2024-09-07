@@ -15,6 +15,9 @@ import Prodile from "../pages/dashboard/profile/Prodile";
 import MyCart from "../pages/dashboard/myCart/MyCart";
 import ManageUser from "../pages/dashboard/manageUser/ManageUser";
 import Payment from "../pages/dashboard/payment/Payment";
+import UserHome from "../pages/dashboard/userHome/UserHome";
+import AdminHome from "../pages/dashboard/adminHome/AdminHome";
+import SellerHome from "../pages/dashboard/sellerHome/SellerHome";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +62,30 @@ export const router = createBrowserRouter([
     path: "dashboard",
     element: <Dashboard />,
     children: [
+      {
+        path: "user-home",
+        element: (
+          <PrivateRoute>
+            <UserHome />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "admin-home",
+        element: (
+          <PrivateRoute>
+            <AdminHome />
+          </PrivateRoute>
+        ),
+      }, //seller
+      {
+        path: "seller-home",
+        element: (
+          <PrivateRoute>
+            <SellerHome />
+          </PrivateRoute>
+        ),
+      }, 
       {
         path: "add-product",
         element: (

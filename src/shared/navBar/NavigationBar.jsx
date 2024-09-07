@@ -7,11 +7,15 @@ import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import useCart from "../../hooks/useCart";
+import useRole from "../../hooks/useRole";
 
 const NavigationBar = () => {
   const { user, logOut } = useAuth();
   const [nav, setNav] = useState(false);
   const [cartData] = useCart();
+  const [role, isLoading] = useRole();
+
+  console.log(role);
 
   const handleNav = () => {
     setNav(!nav);
@@ -59,25 +63,57 @@ const NavigationBar = () => {
         <ul>
           {user ? (
             <div className="flex items-center gap-8">
-              <li>
-                <NavLink
-                  to="dashboard"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
-                      : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
-                  }
-                >
-                  Dashboard
-                </NavLink>
-              </li>
+              {role === "user" && (
+                <li>
+                  <NavLink
+                    to="dashboard/user-home"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
+                        : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
+                    }
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
+              {role === "admin" && (
+                <li>
+                  <NavLink
+                    to="dashboard/admin-home"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
+                        : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
+                    }
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
+              {role === "seller" && (
+                <li>
+                  <NavLink
+                    to="dashboard/seller-home"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-green-500 md:border-b-4 md:border-green-500 md:p-2"
+                        : "block py-2 px-3 text-white rounded-md md:bg-transparent md:text-white md:border-b-0 md:p-2"
+                    }
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
               <li>
                 <NavLink
                   to="dashboard/my-cart"
                   className="flex text-white relative rounded-md md:bg-transparent md:text-white md:border-b-0"
                 >
                   <MdOutlineShoppingCart size={34} />
-                  <h2 className="absolute -right-3 -top-3 bg-red-500 rounded-full text-black font-semibold text-[12px] px-2 py-[2px]">{cartData.length}</h2>
+                  <h2 className="absolute -right-3 -top-3 bg-red-500 rounded-full text-black font-semibold text-[12px] px-2 py-[2px]">
+                    {cartData.length}
+                  </h2>
                 </NavLink>
               </li>
               <li>

@@ -54,12 +54,6 @@ const Sidebar = ({ isActive, setActive }) => {
               </div>
             </div>
           </li>
-          <SidebarNavLinks
-            address="/dashboard"
-            handleToggle={handleToggle}
-            label="Dashboard"
-            icon={FaHome}
-          />
           {role === "user" && <UserSideBar handleToggle={handleToggle} />}
 
           {role === "seller" && <SellerSidebar handleToggle={handleToggle} />}
