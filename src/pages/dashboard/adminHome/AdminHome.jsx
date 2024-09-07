@@ -15,11 +15,14 @@ import {
   Sector,
   Legend,
 } from "recharts";
+import useAuth from "../../../hooks/useAuth";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red"];
 
 const AdminHome = () => {
+
+  const {user} = useAuth()
   // TODO: remove after connect database
   const data = [
     {
@@ -88,6 +91,7 @@ const AdminHome = () => {
     { name: 'Group B', value: 300 },
     { name: 'Group C', value: 300 },
     { name: 'Group D', value: 200 },
+    { name: 'Group E', value: 250 },
   ];
 
   const RADIAN = Math.PI / 180;
@@ -118,8 +122,9 @@ const AdminHome = () => {
   };
 
   return (
-    <div className="p-2">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="p-2 min-h-[calc(100vh-80px)] flex flex-col items-stretch justify-center">
+      <h2 className="text-4xl mb-10 font-semibold">Hi {user?.displayName}, Welcome Back!</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
         <div className="flex items-center justify-center gap-4 p-6 md:p-[56px] bg-gradient-to-r from-[#BB34F5] to-[#FCDBFF] text-white rounded-xl">
           <IoWalletSharp size={52} />
           <div>
@@ -150,7 +155,7 @@ const AdminHome = () => {
         </div>
       </div>
 
-      <div className="w-full lg:flex items-center justify-between mt-10">
+      <div className="w-full lg:flex items-center justify-between">
         <div className="w-full">
           <ResponsiveContainer width="100%" height={400}>
             <BarChart
