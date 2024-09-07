@@ -9,7 +9,6 @@ const useCart = () => {
   const { data: cartData = [], refetch } = useQuery({
     queryKey: ["cartData", user?.email],
     queryFn: async () => {
-      if(!user?.email) return []
       const { data } = await axiosPrivate(`/my-order?email=${user?.email}`);
       return data;
     },
