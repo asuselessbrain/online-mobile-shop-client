@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useCart from "../../../hooks/useCart";
 import useAuth from "../../../hooks/useAuth";
+import { toast } from 'react-toastify';
 
-const PaymentForm = () => {
+const PaymentForm = ({ closeModal }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [dpmCheckerLink, setDpmCheckerLink] = useState("");
   const axiosPrivate = useAxiosPrivate();
-  const [cartData] = useCart();
+  const [cartData, refetch] = useCart();
   const { user } = useAuth();
 
   const price = cartData.reduce((previousValue, currentValue) => {
@@ -102,7 +103,11 @@ const PaymentForm = () => {
 
         const res = await axiosPrivate.post("/payments", payment);
 
-        console.log(res.data);
+        if(res.data.deleteResult.deletedCount>0 && res.data.postResult.insertedId){
+          toast.success("Payment SuccessFull")
+          refetch()
+          closeModal()
+        }
       }
 
       // Handle successful payment here
@@ -128,9 +133,31 @@ const PaymentForm = () => {
         }}
       />
       <p className="my-6 text-red-600 font-semibold text-md">{error}</p>
-      <button type="submit" disabled={!stripe}>
-        Pay
-      </button>
+      <div className="flex items-center justify-around">
+        <button
+          type="submit"
+          disabled={!stripe}
+          className="relative inline-flex items-center justify-center px-6 py-3 text-lg font-medium tracking-tighter text-white bg-gray-800 rounded-md group"
+        >
+          <span className="absolute inset-0 w-full h-full mt-1 ml-1 transition-all duration-300 ease-in-out bg-[#D1A054] rounded-md group-hover:mt-0 group-hover:ml-0"></span>
+          <span className="absolute inset-0 w-full h-full bg-white rounded-md "></span>
+          <span className="absolute inset-0 w-full h-full transition-all duration-200 ease-in-out delay-100 bg-[#f1be70] rounded-md opacity-0 group-hover:opacity-100 "></span>
+          <span className="relative text-[#D1A054] transition-colors duration-200 ease-in-out delay-100 group-hover:text-white">
+            Pay Now
+          </span>
+        </button>
+        <button
+          onClick={closeModal}
+          className="relative inline-flex items-center justify-center px-3 py-2 text-lg font-medium tracking-tighter text-white bg-gray-800 rounded-md group"
+        >
+          <span className="absolute inset-0 w-full h-full mt-1 ml-1 transition-all duration-300 ease-in-out bg-rose-500 rounded-md group-hover:mt-0 group-hover:ml-0"></span>
+          <span className="absolute inset-0 w-full h-full bg-white rounded-md "></span>
+          <span className="absolute inset-0 w-full h-full transition-all duration-200 ease-in-out delay-100 bg-rose-500 rounded-md opacity-0 group-hover:opacity-100 "></span>
+          <span className="relative text-rose-500 transition-colors duration-200 ease-in-out delay-100 group-hover:text-white">
+            Back
+          </span>
+        </button>
+      </div>
     </form>
   );
 };
